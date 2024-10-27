@@ -4,6 +4,9 @@ import pandas as pd
 from pathlib import Path
 
 
+GLOBAL_DICT = {}
+
+
 def fix_csv(base_dir):
     # iterate over all directories and files in the base directory
     for root, dirs, files in os.walk(base_dir):
@@ -27,25 +30,26 @@ def fix_csv(base_dir):
     print("CSV files processed and temp files created successfully.")
 
 
-def process_csv_file(file_path, global_dict):
+def process_csv_file(file_path):
+    GLOBAL_DICT[file_path.name] = {}
     try:
         df = pd.read_csv(file_path)
-
-        global_dict[file_path.name] = {}
-
-        # get the unique logs from the csv
-        unique_logs = df[' Event'].unique()
-
-        # print(unique_logs)
-
-        # total damage taken
 
         water_dmg = 0
         bullet_dmg = 0
         collision_dmg = 0
 
+        total_time = df['Timestamp'].iloc[-2] - df['Timestamp'].iloc[0]
+        healing_percentages = []
+        last_healing_event_time = None
+
+        total_bullets_fired = 0
+        total_bullets_missed = 0
+        total_hit_count = 0
+        total_bullet_distance = 0
+
         for i in range(len(df)):
-            # Check if the event is 'Damage Taken'
+            # PERCENTAGE DAMAGE TAKEN (BY TYPE OVER ALL DAMAGE TAKEN)
             if df.loc[i, ' Event'] == 'Damage taken':
                 damage = df.loc[i, ' Value']
 
@@ -59,36 +63,52 @@ def process_csv_file(file_path, global_dict):
                 else:
                     collision_dmg += damage
 
-        p_bullet_dmg = bullet_dmg / (water_dmg + collision_dmg + bullet_dmg)
-        p_water_dmg = water_dmg / (water_dmg + collision_dmg + bullet_dmg)
-        p_collision_dmg = collision_dmg / (water_dmg + collision_dmg + bullet_dmg)
-
-        # healing time
-        total_time = df['Timestamp'].iloc[-2] - df['Timestamp'].iloc[0]
-
-        healing_percentages = []
-
-        for i in range(1, len(df)):
-            # Check if the current or previous event is 'Damage Taken' or 'Bullet Fired'
-            if df.loc[i, ' Event'] in [' Damage Taken', ' Bullet Fired']:
-                previous_event = df.loc[i - 1, 'Event']
-                if previous_event in ['Damage Taken', 'Bullet Fired']:
-                    # Calculate the healing interval time
-                    healing_time = df.loc[i, 'Timestamp'] - df.loc[i - 1, 'Timestamp']
-                    # Calculate the percentage of the healing time with respect to the total time
+            # PERCENTAGE HEALING TIME (OVER TOTAL PLAY TIME)
+            # locate the windows between two 'Damage taken' or 'Bullet Fired' events
+            if df.loc[i, ' Event'] in ['Damage taken', 'Bullet Fired']:
+                if last_healing_event_time is not None:
+                    # calculate the healing interval time
+                    healing_time = df.loc[i, 'Timestamp'] - last_healing_event_time
+                    # calculate the percentage of healing time with respect to the total time
                     healing_percentage = (healing_time / total_time) * 100
                     # Append the percentage to the list
                     healing_percentages.append(healing_percentage)
 
-        average_healing_percentage = sum(healing_percentages) / len(healing_percentages)
+                # update the last healing event time
+                last_healing_event_time = df.loc[i, 'Timestamp']
 
-        # number of bullets fired
+            # PERCENTAGE BULLETS FIRED (OF TOTAL EVENTS)
+            if df.loc[i, ' Event'] == 'Bullet Fired':
+                total_bullets_fired += 1
 
-        # number of bullets missed
+            # PERCENTAGE BULLETS MISSED (OF TOTAL BULLETS FIRED)
+            if df.loc[i, ' Event'] == 'Bullet Missed':
+                total_bullets_missed += 1
 
-        # distance bullet travels
+            # AVERAGE DISTANCE BULLET TRAVELS
+            if df.loc[i, ' Event'] == 'Enemy hit':
+                total_hit_count += 1
+                total_bullet_distance += df.loc[i, ' Value']
 
-        # movement counts
+        # calculate percentage damage taken
+        total_dmg = water_dmg + collision_dmg + bullet_dmg
+        p_bullet_dmg = bullet_dmg / total_dmg if total_dmg > 0 else 0
+        p_water_dmg = water_dmg / total_dmg if total_dmg > 0 else 0
+        p_collision_dmg = collision_dmg / total_dmg if total_dmg > 0 else 0
+
+        # calculate the average healing percentage
+        average_healing_percentage = sum(healing_percentages) / len(healing_percentages) if healing_percentages else 0
+
+        # calculate percentage bullets fired
+        p_bullets_fired = total_bullets_fired / (len(df) - 1)  # (- 1) because last row is 'Time alive'
+
+        # calculate percentage bullets missed
+        p_bullets_missed = total_bullets_missed / total_bullets_fired if total_bullets_fired > 0 else 0
+
+        # calculate average distance bullets travelled
+        average_bullet_distance = total_bullet_distance / total_hit_count if total_hit_count > 0 else 0
+
+        # PERCENTAGE MOVEMENT DISTRIBUTION (OVER ALL MOVEMENT EVENTS)
         value_counts = df[' Event'].value_counts()
 
         accelerate_count = value_counts.get('Accelerate', 0)
@@ -97,19 +117,28 @@ def process_csv_file(file_path, global_dict):
 
         movement_count = accelerate_count + right_count + left_count
 
-        # % accelerated (of total movement)
-        p_accelerated = round(accelerate_count / movement_count, 2)
+        # calculate percentage accelerated (of total movement)
+        p_accelerated = accelerate_count / movement_count if movement_count > 0 else 0
 
-        # % turned left (of total movement)
-        p_right = round(right_count / movement_count, 2)
+        # calculate percentage turned left (of total movement)
+        p_right = right_count / movement_count if movement_count > 0 else 0
 
-        # % turned right (of total movement)
-        p_left = round(left_count / movement_count, 2)
+        # calculate percentage turned right (of total movement)
+        p_left = left_count / movement_count if movement_count > 0 else 0
 
-        # total time survived
+        GLOBAL_DICT[file_path.name] = {'p_bullet_dmg': float(p_bullet_dmg),
+                                       'p_water_dmg': float(p_water_dmg),
+                                       'p_collision_dmg': float(p_collision_dmg),
+                                       'average_healing_percentage': float(average_healing_percentage),
+                                       'p_bullets_fired': float(p_bullets_fired),
+                                       'p_bullets_missed': float(p_bullets_missed),
+                                       'average_bullet_distance': float(average_bullet_distance),
+                                       'p_accelerated': float(p_accelerated),
+                                       'p_right': float(p_right),
+                                       'p_left': float(p_left)
+                                       }
 
         print(f"Successfully processed: {file_path.name}")
-
     except Exception as e:
         print(f"Error processing {file_path.name}: {str(e)}")
 
@@ -136,11 +165,9 @@ def process_user_folders(main_path):
             print(f"No relevant CSV files found in {user_dir.name}")
             continue
 
-        dictionary = {}
-
         # process each relevant CSV file
         for file_path in csv_files:
-            process_csv_file(file_path, dictionary)
+            process_csv_file(file_path)
 
 
 if __name__ == "__main__":
@@ -148,5 +175,11 @@ if __name__ == "__main__":
     main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning'
     process_user_folders(main_directory)
 
-    print("\nProcessing complete!")
+    print('=' * 20)
+    for key, value in GLOBAL_DICT.items():
+        print(key)
+        for k, v in value.items():
+            print(f"{k}: {v}")
+        print()
 
+    print("\nProcessing complete!")
