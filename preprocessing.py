@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import pandas as pd
 from pathlib import Path
 
@@ -175,11 +176,7 @@ if __name__ == "__main__":
     main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning'
     process_user_folders(main_directory)
 
-    print('=' * 20)
-    for key, value in GLOBAL_DICT.items():
-        print(key)
-        for k, v in value.items():
-            print(f"{k}: {v}")
-        print()
+    with open("features.json", "w") as outfile:
+        json.dump(GLOBAL_DICT, outfile)
 
     print("\nProcessing complete!")
