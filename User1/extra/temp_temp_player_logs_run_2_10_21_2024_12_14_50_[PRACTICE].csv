@@ -1,0 +1,545 @@
+Timestamp, Event, Value
+0.201,Enemy killed,1
+0.409,Enemy killed,1
+0.618,Enemy killed,1
+0.819,Enemy killed,1
+1.014,Enemy killed,1
+1.216,Enemy killed,1
+1.417,Enemy killed,1
+1.618,Enemy killed,1
+1.827,Enemy killed,1
+2.028,Enemy killed,1
+2.233,Enemy killed,1
+2.445,Enemy killed,1
+2.670,Enemy killed,1
+2.881,Enemy killed,1
+3.099,Enemy killed,1
+3.316,Enemy killed,1
+3.550,Enemy killed,1
+3.783,Enemy killed,1
+3.999,Enemy killed,1
+4.197,Enemy killed,1
+4.401,Enemy killed,1
+4.627,Enemy killed,1
+4.643,Enemy killed,1
+4.712,Enemy killed,1
+5.317,Turn Left,1
+5.318,Accelerate,1
+5.378,Turn Left,1
+5.378,Accelerate,1
+5.436,Turn Right,1
+5.436,Accelerate,1
+5.493,Turn Right,1
+5.493,Accelerate,1
+5.545,Turn Right,1
+5.545,Accelerate,1
+5.600,Accelerate,1
+5.654,Accelerate,1
+5.704,Accelerate,1
+5.756,Accelerate,1
+5.804,Turn Left,1
+5.804,Accelerate,1
+5.854,Turn Left,1
+5.854,Accelerate,1
+5.898,Turn Left,1
+5.898,Accelerate,1
+5.943,Turn Left,1
+5.943,Accelerate,1
+5.988,Turn Left,1
+5.988,Accelerate,1
+6.032,Accelerate,1
+6.075,Accelerate,1
+6.114,Accelerate,1
+6.234,Bullet Fired,1
+6.309,Bullet Fired,1
+6.414,Bullet Fired,1
+6.512,Bullet Fired,1
+6.606,Bullet Fired,1
+6.719,Bullet Fired,1
+6.825,Accelerate,1
+6.847,Accelerate,1
+6.874,Accelerate,1
+6.897,Accelerate,1
+6.919,Accelerate,1
+6.943,Accelerate,1
+6.964,Accelerate,1
+6.986,Accelerate,1
+7.009,Accelerate,1
+7.029,Accelerate,1
+7.051,Accelerate,1
+7.071,Accelerate,1
+7.090,Accelerate,1
+7.110,Accelerate,1
+7.130,Accelerate,1
+7.148,Accelerate,1
+7.165,Accelerate,1
+7.184,Accelerate,1
+7.202,Accelerate,1
+7.224,Accelerate,1
+7.236,Accelerate,1
+7.251,Accelerate,1
+7.269,Accelerate,1
+7.286,Accelerate,1
+7.303,Accelerate,1
+7.319,Accelerate,1
+7.334,Accelerate,1
+7.352,Accelerate,1
+7.363,Accelerate,1
+7.378,Accelerate,1
+7.392,Accelerate,1
+7.407,Accelerate,1
+7.421,Accelerate,1
+7.436,Accelerate,1
+7.454,Accelerate,1
+7.471,Accelerate,1
+7.487,Accelerate,1
+7.504,Accelerate,1
+7.521,Turn Left,1
+7.521,Accelerate,1
+7.537,Turn Left,1
+7.538,Accelerate,1
+7.553,Turn Left,1
+7.553,Accelerate,1
+7.571,Turn Left,1
+7.571,Accelerate,1
+7.587,Turn Left,1
+7.587,Accelerate,1
+7.604,Bullet Missed,1
+7.605,Accelerate,1
+7.619,Accelerate,1
+7.636,Accelerate,1
+7.654,Accelerate,1
+7.671,Accelerate,1
+7.687,Accelerate,1
+7.705,Accelerate,1
+7.719,Accelerate,1
+7.736,Accelerate,1
+7.755,Accelerate,1
+7.769,Bullet Missed,1
+7.771,Accelerate,1
+7.787,Accelerate,1
+7.803,Accelerate,1
+7.820,Accelerate,1
+7.837,Accelerate,1
+7.853,Accelerate,1
+7.869,Accelerate,1
+7.886,Accelerate,1
+7.903,Accelerate,1
+7.920,Accelerate,1
+7.936,Accelerate,1
+7.955,Accelerate,1
+7.969,Accelerate,1
+7.986,Bullet Missed,1
+7.987,Accelerate,1
+8.003,Accelerate,1
+8.020,Accelerate,1
+8.038,Accelerate,1
+8.052,Accelerate,1
+8.070,Accelerate,1
+8.087,Accelerate,1
+8.104,Accelerate,1
+8.121,Accelerate,1
+8.136,Accelerate,1
+8.154,Accelerate,1
+8.170,Accelerate,1
+8.187,Accelerate,1
+8.202,Bullet Missed,1
+8.204,Accelerate,1
+8.221,Accelerate,1
+8.237,Accelerate,1
+8.254,Accelerate,1
+8.271,Accelerate,1
+8.286,Accelerate,1
+8.304,Accelerate,1
+8.320,Accelerate,1
+8.336,Accelerate,1
+8.353,Accelerate,1
+8.370,Accelerate,1
+8.388,Accelerate,1
+8.405,Accelerate,1
+8.420,Accelerate,1
+8.437,Accelerate,1
+8.453,Bullet Missed,1
+8.454,Accelerate,1
+8.470,Accelerate,1
+8.487,Accelerate,1
+8.504,Accelerate,1
+8.521,Accelerate,1
+8.538,Accelerate,1
+8.554,Accelerate,1
+8.571,Accelerate,1
+8.587,Accelerate,1
+8.604,Accelerate,1
+8.621,Accelerate,1
+8.638,Turn Left,1
+8.638,Accelerate,1
+8.654,Turn Left,1
+8.654,Accelerate,1
+8.670,Turn Left,1
+8.670,Accelerate,1
+8.687,Turn Left,1
+8.687,Accelerate,1
+8.703,Turn Left,1
+8.703,Accelerate,1
+8.721,Bullet Missed,1
+8.722,Turn Left,1
+8.722,Accelerate,1
+8.737,Turn Left,1
+8.737,Accelerate,1
+8.755,Turn Left,1
+8.755,Accelerate,1
+8.771,Turn Left,1
+8.771,Accelerate,1
+8.786,Turn Left,1
+8.786,Accelerate,1
+8.803,Turn Left,1
+8.803,Accelerate,1
+8.819,Turn Left,1
+8.819,Accelerate,1
+8.836,Turn Left,1
+8.836,Accelerate,1
+8.853,Turn Left,1
+8.853,Accelerate,1
+8.871,Accelerate,1
+8.887,Accelerate,1
+8.903,Accelerate,1
+8.920,Accelerate,1
+8.937,Accelerate,1
+8.953,Accelerate,1
+8.970,Accelerate,1
+8.987,Accelerate,1
+9.004,Accelerate,1
+9.020,Accelerate,1
+9.038,Accelerate,1
+9.053,Accelerate,1
+9.071,Accelerate,1
+9.087,Accelerate,1
+9.103,Accelerate,1
+9.120,Accelerate,1
+9.137,Accelerate,1
+9.153,Turn Right,1
+9.153,Accelerate,1
+9.170,Turn Right,1
+9.170,Accelerate,1
+9.187,Turn Right,1
+9.187,Accelerate,1
+9.204,Turn Right,1
+9.204,Accelerate,1
+9.220,Turn Right,1
+9.220,Accelerate,1
+9.238,Turn Right,1
+9.238,Accelerate,1
+9.254,Turn Right,1
+9.254,Accelerate,1
+9.271,Turn Right,1
+9.271,Accelerate,1
+9.288,Turn Right,1
+9.288,Accelerate,1
+9.304,Turn Right,1
+9.304,Accelerate,1
+9.321,Turn Right,1
+9.321,Accelerate,1
+9.336,Turn Right,1
+9.337,Accelerate,1
+9.353,Accelerate,1
+9.371,Accelerate,1
+9.388,Accelerate,1
+9.405,Accelerate,1
+9.421,Accelerate,1
+9.438,Accelerate,1
+9.454,Accelerate,1
+9.470,Accelerate,1
+9.488,Accelerate,1
+9.504,Accelerate,1
+9.519,Accelerate,1
+9.537,Accelerate,1
+9.552,Accelerate,1
+9.570,Accelerate,1
+9.587,Accelerate,1
+9.604,Accelerate,1
+9.621,Accelerate,1
+9.636,Accelerate,1
+9.655,Accelerate,1
+9.670,Accelerate,1
+9.686,Accelerate,1
+9.703,Accelerate,1
+9.721,Accelerate,1
+9.737,Accelerate,1
+9.753,Accelerate,1
+9.770,Accelerate,1
+9.787,Accelerate,1
+9.803,Accelerate,1
+9.819,Accelerate,1
+9.837,Accelerate,1
+9.854,Turn Left,1
+9.854,Accelerate,1
+9.869,Turn Left,1
+9.869,Accelerate,1
+9.887,Turn Left,1
+9.887,Accelerate,1
+9.904,Turn Left,1
+9.904,Accelerate,1
+9.920,Turn Left,1
+9.920,Accelerate,1
+9.937,Turn Left,1
+9.937,Accelerate,1
+9.954,Turn Left,1
+9.954,Accelerate,1
+9.971,Turn Left,1
+9.971,Accelerate,1
+9.987,Turn Left,1
+9.987,Accelerate,1
+10.003,Turn Left,1
+10.003,Accelerate,1
+10.020,Turn Left,1
+10.020,Accelerate,1
+10.036,Turn Left,1
+10.036,Accelerate,1
+10.053,Turn Left,1
+10.053,Accelerate,1
+10.071,Bullet Fired,1
+10.071,Turn Left,1
+10.071,Accelerate,1
+10.086,Turn Left,1
+10.170,Bullet Fired,1
+10.271,Bullet Fired,1
+10.372,Bullet Fired,1
+10.387,Turn Left,1
+10.407,Turn Left,1
+10.421,Turn Left,1
+10.437,Turn Left,1
+10.454,Turn Left,1
+10.471,Bullet Fired,1
+10.471,Turn Left,1
+10.487,Turn Left,1
+10.505,Turn Left,1
+10.521,Turn Left,1
+10.539,Turn Left,1
+10.553,Turn Left,1
+10.570,Bullet Fired,1
+10.570,Turn Left,1
+10.588,Turn Left,1
+10.604,Turn Left,1
+10.621,Turn Left,1
+10.637,Turn Left,1
+10.653,Turn Left,1
+10.671,Bullet Fired,1
+10.671,Turn Left,1
+10.688,Turn Left,1
+10.704,Turn Left,1
+10.721,Turn Left,1
+10.737,Turn Left,1
+10.753,Turn Left,1
+10.771,Bullet Fired,1
+10.772,Turn Left,1
+10.788,Turn Left,1
+10.805,Turn Left,1
+10.821,Turn Left,1
+10.871,Bullet Fired,1
+10.971,Bullet Fired,1
+11.070,Bullet Fired,1
+11.171,Bullet Fired,1
+11.254,Turn Left,1
+11.271,Bullet Fired,1
+11.271,Turn Left,1
+11.289,Turn Left,1
+11.304,Turn Left,1
+11.322,Turn Left,1
+11.337,Turn Left,1
+11.355,Turn Left,1
+11.371,Bullet Fired,1
+11.371,Turn Left,1
+11.388,Turn Left,1
+11.418,Turn Left,1
+11.423,Turn Left,1
+11.437,Turn Left,1
+11.455,Bullet Fired,1
+11.537,Bullet Fired,1
+11.636,Bullet Fired,1
+11.737,Bullet Fired,1
+11.838,Bullet Fired,1
+11.920,Bullet Missed,1
+11.938,Bullet Fired,1
+11.970,Bullet Missed,1
+11.971,Bullet Missed,1
+11.972,Turn Right,1
+11.988,Turn Right,1
+12.005,Turn Right,1
+12.020,Bullet Missed,1
+12.021,Turn Right,1
+12.039,Bullet Fired,1
+12.039,Turn Right,1
+12.055,Turn Right,1
+12.071,Bullet Missed,1
+12.072,Turn Right,1
+12.086,Turn Right,1
+12.103,Turn Right,1
+12.121,Turn Right,1
+12.136,Bullet Missed,1
+12.138,Bullet Fired,1
+12.138,Turn Right,1
+12.154,Turn Right,1
+12.169,Bullet Missed,1
+12.170,Turn Right,1
+12.235,Bullet Missed,1
+12.270,Bullet Missed,1
+12.352,Bullet Missed,1
+12.353,Bullet Missed,1
+12.402,Bullet Missed,1
+12.419,Bullet Missed,1
+12.470,Turn Left,1
+12.486,Bullet Missed,1
+12.486,Bullet Missed,1
+12.487,Turn Left,1
+12.503,Turn Left,1
+12.521,Turn Left,1
+12.537,Turn Left,1
+12.552,Bullet Missed,1
+12.554,Turn Left,1
+12.571,Turn Right,1
+12.585,Bullet Missed,1
+12.587,Turn Right,1
+12.603,Turn Right,1
+12.620,Bullet Missed,1
+12.622,Turn Right,1
+12.636,Turn Right,1
+12.653,Turn Right,1
+12.670,Bullet Missed,1
+12.671,Turn Right,1
+12.687,Turn Right,1
+12.702,Bullet Missed,1
+12.703,Turn Right,1
+12.721,Turn Right,1
+12.736,Bullet Missed,1
+12.737,Turn Right,1
+12.754,Turn Right,1
+12.770,Turn Right,1
+12.787,Turn Right,1
+12.805,Turn Right,1
+12.821,Turn Right,1
+12.837,Turn Right,1
+12.853,Turn Right,1
+12.870,Turn Right,1
+12.887,Bullet Fired,1
+12.887,Turn Right,1
+12.903,Turn Right,1
+12.921,Turn Right,1
+12.937,Turn Right,1
+12.953,Turn Right,1
+12.969,Bullet Missed,1
+12.971,Turn Right,1
+12.986,Bullet Fired,1
+12.986,Turn Right,1
+13.003,Turn Right,1
+13.021,Turn Right,1
+13.037,Turn Right,1
+13.054,Turn Right,1
+13.070,Turn Right,1
+13.087,Bullet Fired,1
+13.087,Turn Right,1
+13.103,Turn Right,1
+13.121,Turn Right,1
+13.138,Turn Right,1
+13.152,Turn Right,1
+13.169,Turn Right,1
+13.186,Bullet Fired,1
+13.186,Turn Right,1
+13.202,Turn Right,1
+13.221,Turn Right,1
+13.237,Turn Right,1
+13.253,Turn Right,1
+13.271,Turn Right,1
+13.271,Accelerate,1
+13.287,Bullet Fired,1
+13.287,Turn Right,1
+13.287,Accelerate,1
+13.303,Turn Right,1
+13.304,Accelerate,1
+13.321,Turn Right,1
+13.321,Accelerate,1
+13.338,Turn Right,1
+13.338,Accelerate,1
+13.353,Turn Right,1
+13.353,Accelerate,1
+13.370,Bullet Missed,1
+13.371,Turn Right,1
+13.371,Accelerate,1
+13.387,Bullet Fired,1
+13.388,Turn Right,1
+13.388,Accelerate,1
+13.403,Turn Right,1
+13.403,Accelerate,1
+13.421,Turn Right,1
+13.421,Accelerate,1
+13.437,Accelerate,1
+13.453,Accelerate,1
+13.471,Accelerate,1
+13.487,Bullet Fired,1
+13.487,Accelerate,1
+13.504,Accelerate,1
+13.520,Accelerate,1
+13.537,Accelerate,1
+13.553,Accelerate,1
+13.570,Accelerate,1
+13.587,Bullet Fired,1
+13.587,Accelerate,1
+13.603,Bullet Missed,1
+13.604,Accelerate,1
+13.621,Accelerate,1
+13.638,Accelerate,1
+13.653,Accelerate,1
+13.671,Accelerate,1
+13.687,Bullet Fired,1
+13.687,Accelerate,1
+13.704,Accelerate,1
+13.721,Accelerate,1
+13.737,Accelerate,1
+13.753,Accelerate,1
+13.772,Accelerate,1
+13.787,Bullet Fired,1
+13.787,Turn Right,1
+13.787,Accelerate,1
+13.804,Turn Right,1
+13.804,Accelerate,1
+13.822,Turn Right,1
+13.822,Accelerate,1
+13.838,Turn Right,1
+13.838,Accelerate,1
+13.854,Turn Right,1
+13.854,Accelerate,1
+13.870,Turn Right,1
+13.871,Accelerate,1
+13.889,Damage taken,1
+13.890,Bullet Fired,1
+13.890,Turn Right,1
+13.890,Accelerate,1
+13.903,Turn Right,1
+13.903,Accelerate,1
+13.920,Turn Right,1
+13.937,Turn Right,1
+13.955,Turn Right,1
+13.971,Turn Right,1
+13.986,Bullet Missed,1
+13.988,Bullet Fired,1
+13.988,Turn Right,1
+14.087,Bullet Fired,1
+14.153,Damage taken,1
+14.187,Bullet Fired,1
+14.386,Damage taken,1
+14.437,Accelerate,1
+14.454,Accelerate,1
+14.471,Accelerate,1
+14.487,Accelerate,1
+14.503,Accelerate,1
+14.522,Accelerate,1
+14.538,Accelerate,1
+14.554,Accelerate,1
+14.570,Accelerate,1
+14.586,Accelerate,1
+14.603,Accelerate,1
+14.620,Accelerate,1
+14.636,Accelerate,1
+14.652,Enemy collision,1
+14.652,Damage taken,1
+14.652,Enemy killed,1
+14.654,Time alive,10129
