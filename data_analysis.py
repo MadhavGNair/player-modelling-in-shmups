@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans, DBSCAN
 from collections import defaultdict
@@ -197,6 +198,37 @@ def plot_clusters(viz_data, plot_type='all', save_path=None):
         print("t-SNE visualization not available due to small sample size")
 
 
+def display_pca(data, cluster_dict):
+    filenames = list(data.keys())
+    features = list(data[filenames[0]].keys())
+
+    # convert to numpy array
+    X = np.array([[data[fname][feat] for feat in features] for fname in filenames])
+
+    # standardize the features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    pca = PCA(n_components=2)
+    principal_components = pca.fit_transform(X_scaled)
+    principal_df = pd.DataFrame(principal_components, columns=['principal component 1', 'principal component 2'])
+    finalDf = pd.concat([principal_df, pd.DataFrame(filenames)], axis=1)
+
+    finalDf['cluster'] = [cluster_dict[name] for name in filenames]
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    ax.set_xlabel('Principal Component 1')
+    ax.set_ylabel('Principal Component 2')
+    ax.set_title('PCA')
+    cluster_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
+                      '#46f0f0', '#f032e6', '#bcf60c', '#fabebe']
+    for c in set(finalDf['cluster']):
+        cluster_data = finalDf.loc[finalDf['cluster'] == c]
+        ax.scatter(cluster_data['principal component 1'], cluster_data['principal component 2'], c=cluster_colors[c],
+                   label=str(cluster))
+    plt.show()
+
+
 class Clustering:
     def __init__(self, data):
         self.data = data
@@ -294,13 +326,25 @@ if __name__ == "__main__":
         sample_data = json.load(file)
 
     model = Clustering(sample_data)
-    # k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=3)
-    # print_kmeans_stats(k_assignments, k_importance, k_stats)
 
-    d_assignments, d_distributions, d_stats, d_noise, plot_data = model.dbscan_clustering(
-        eps=0.05,
-        min_samples=2
-    )
-    # plot_clusters(plot_data, plot_type='all', save_path='cluster_viz')
-    print_dbscan_stats(d_assignments, d_distributions, d_stats, d_noise)
+    # # K-MEANS CLUSTERING:
+    k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=3)
+    print_kmeans_stats(k_assignments, k_importance, k_stats)
 
+    c_dict = {}
+    for file, cluster in k_assignments.items():
+        c_dict[file] = int(cluster)
+
+    # DBSCAN CLUSTERING:
+    # d_assignments, d_distributions, d_stats, d_noise, plot_data = model.dbscan_clustering(
+    #     eps=1,
+    #     min_samples=5
+    # )
+    # # plot_clusters(plot_data, plot_type='all', save_path='cluster_viz')
+    # print_dbscan_stats(d_assignments, d_distributions, d_stats, d_noise)
+    #
+    # c_dict = {}
+    # for file, cluster in d_assignments.items():
+    #     c_dict[file] = int(cluster)
+
+    display_pca(sample_data, c_dict)

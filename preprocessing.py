@@ -133,7 +133,7 @@ def process_csv_file(file_path):
                                        'average_healing_percentage': float(average_healing_percentage),
                                        'p_bullets_fired': float(p_bullets_fired),
                                        'p_bullets_missed': float(p_bullets_missed),
-                                       'average_bullet_distance': float(average_bullet_distance),
+                                       'average_bullet_time': float(average_bullet_distance),
                                        'p_accelerated': float(p_accelerated),
                                        'p_right': float(p_right),
                                        'p_left': float(p_left)
@@ -147,18 +147,15 @@ def process_csv_file(file_path):
 def process_user_folders(main_path):
     main_dir = Path(main_path)
 
-    # pattern for matching User folders (User1, User2, etc.)
-    user_pattern = re.compile(r"User\d+$")
-
-    # get all User directories
+    # get all directories
     user_dirs = [d for d in main_dir.iterdir()
-                 if d.is_dir() and user_pattern.match(d.name)]
+                 if d.is_dir()]
 
     for user_dir in user_dirs:
         print(f"\nProcessing directory: {user_dir.name}")
 
-        # get all CSV files in the user directory that start with 'temp_' and ignore 'extra' folder
-        csv_files = [f for f in user_dir.glob("temp_*.csv")
+        # get all CSV files in the user directory
+        csv_files = [f for f in user_dir.glob("*.csv")
                      if f.is_file() and not any(parent.name == "extra"
                                                 for parent in f.parents)]
 
@@ -166,14 +163,34 @@ def process_user_folders(main_path):
             print(f"No relevant CSV files found in {user_dir.name}")
             continue
 
+        for i in csv_files:
+            print(i)
+
         # process each relevant CSV file
         for file_path in csv_files:
             process_csv_file(file_path)
 
 
+def count_pdfs(folder_path):
+    main_dir = Path(folder_path)
+    user_dirs = [d for d in main_dir.iterdir() if d.is_dir()]
+    f = [os.listdir(folder) for folder in user_dirs]
+    files_in_folder = []
+    for file in f:
+        files_in_folder.extend(file)
+    pdf_files = []
+    for files in files_in_folder:
+        pdf_files.append(file for file in files if file.endswith('.csv'))
+    print(pdf_files)
+    return len(pdf_files)
+
+
 if __name__ == "__main__":
     # Replace with your main directory path
-    main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning'
+    main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning/data'
+
+    # print(count_pdfs(main_directory))
+
     process_user_folders(main_directory)
 
     with open("features.json", "w") as outfile:
