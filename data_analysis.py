@@ -563,17 +563,17 @@ class Clustering:
 
 
 if __name__ == "__main__":
-    with open('misc/features.json', 'r') as file:
+    with open('features.json', 'r') as file:
         sample_data = json.load(file)
 
     model = Clustering(sample_data)
 
     # K-MEANS CLUSTERING:
-    # k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=5)
+    k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=5)
     # print_kmeans_stats(k_assignments, k_importance, k_stats)
 
     # K-MEANS OPTIMIZATION:
-    # results = model.optimize_clusters(max_clusters=100)
+    # results = model.optimize_clusters(max_clusters=10)
     #
     # # Create and display the elbow plot
     # elbow_plot = plot_elbow(results)
@@ -588,9 +588,9 @@ if __name__ == "__main__":
     # for file, cluster in k_assignments.items():
     #     c_dict[file] = int(cluster)
     #
-    # plot, dataframe = display_pca(sample_data, c_dict, shaded=True)
+    # plot, dataframe = display_pca(sample_data, c_dict, shaded=False)
     # # plot.show()
-
+    #
     # clusters = {
     #     'Cluster 0': {},
     #     'Cluster 1': {},
@@ -609,15 +609,15 @@ if __name__ == "__main__":
     #     if cluster_class.size > 0:  # Check if filename was found in file_data
     #         cluster_key = f'Cluster {cluster_class[0]}'
     #         clusters[cluster_key][filename] = data
-
-    # with open('misc/clusters_5.json', 'w') as file:
+    #
+    # with open('clusters_5.json', 'w') as file:
     #     json.dump(clusters, file)
-
-    # feature_data = load_and_preprocess_data('misc/clusters_5.json')
+    #
+    # feature_data = load_and_preprocess_data('clusters_5.json')
     # analysis_results = analyze_clusters_raw(feature_data)
     # figures = visualize_cluster_analysis(analysis_results)
 
     # TUKEY ANALYSIS:
-    perform_anova_tukey('misc/clusters_5.json', metric='p_water_dmg')
+    perform_anova_tukey('clusters_5.json', metric='p_water_dmg')
 
 

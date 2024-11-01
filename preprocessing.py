@@ -197,7 +197,7 @@ if __name__ == "__main__":
 
     process_user_folders(main_directory)
 
-    with open("misc/features.json", "w") as outfile:
+    with open("features.json", "w") as outfile:
         json.dump(GLOBAL_DICT, outfile)
 
     print("\nProcessing complete!")
