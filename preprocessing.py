@@ -34,8 +34,12 @@ def fix_csv(base_dir):
 def process_csv_file(file_path):
     GLOBAL_DICT[file_path.name] = {}
     try:
+        # read the csv
         df = pd.read_csv(file_path)
 
+        # DATA EXPLORATION
+
+        # FEATURE EXTRACTION
         water_dmg = 0
         bullet_dmg = 0
         collision_dmg = 0
@@ -193,7 +197,7 @@ if __name__ == "__main__":
 
     process_user_folders(main_directory)
 
-    with open("features.json", "w") as outfile:
+    with open("misc/features.json", "w") as outfile:
         json.dump(GLOBAL_DICT, outfile)
 
     print("\nProcessing complete!")
