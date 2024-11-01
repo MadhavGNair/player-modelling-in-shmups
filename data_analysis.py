@@ -4,7 +4,9 @@ import pandas as pd
 from collections import defaultdict
 
 import scipy.stats as stats
+import statsmodels.api as sm
 from kneed import KneeLocator
+import statsmodels.stats.multicomp
 from scipy.spatial import ConvexHull
 from scipy.spatial.distance import cdist
 
@@ -12,8 +14,8 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.gridspec import GridSpec
 
+from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans, DBSCAN
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 
@@ -136,6 +138,25 @@ def load_and_preprocess_data(json_file):
     return feature_data
 
 
+def write_tukey_hsd_to_file(feature_name, tukey_result):
+    file_name = f"Tukey_HSD_{feature_name}.txt"
+    with open(file_name, "w") as file:
+        file.write(f"Tukey's HSD Test Results for Feature: {feature_name}\n")
+        file.write("=" * 50 + "\n\n")
+
+        # Write summary table with headers
+        file.write("{:<15} {:<15} {:<10} {:<10} {:<10}\n".format(
+            "Group1", "Group2", "Meandiff", "p-adj", "Reject"
+        ))
+        file.write("-" * 50 + "\n")
+
+        # Write each result row neatly
+        for res in tukey_result.summary().data[1:]:
+            file.write("{:<15} {:<15} {:<10.4f} {:<10.4f} {:<10}\n".format(
+                res[0], res[1], res[2], res[4], "Yes" if res[5] else "No"
+            ))
+
+
 def analyze_clusters_raw(feature_data):
     feature_comparisons = {}
 
@@ -143,6 +164,7 @@ def analyze_clusters_raw(feature_data):
         # Calculate statistics for each cluster
         cluster_stats = {}
         raw_values = []
+        labels = []
 
         for cluster_id, values in cluster_values.items():
             cluster_stats[cluster_id] = {
@@ -151,6 +173,7 @@ def analyze_clusters_raw(feature_data):
                 'n': len(values)
             }
             raw_values.append(values)
+            labels.extend([cluster_id] * len(values))
 
         # Perform one-way ANOVA using raw values
         if len(raw_values) > 1:
@@ -162,8 +185,15 @@ def analyze_clusters_raw(feature_data):
                     'f_statistic': f_statistic,
                     'p_value': p_value
                 },
-                'significant_difference': p_value < 0.05
+                'significant_difference': bool(p_value < 0.05)
             }
+
+            if p_value < 0.05:
+                all_values = np.concatenate(raw_values)
+                tukey_result = statsmodels.stats.multicomp.pairwise_tukeyhsd(endog=all_values,
+                                                                             groups=labels, alpha=0.05)
+
+                write_tukey_hsd_to_file(feature_name, tukey_result)
 
     analysis_results = {
         'num_clusters': len(next(iter(feature_data.values()))),
@@ -171,6 +201,37 @@ def analyze_clusters_raw(feature_data):
     }
 
     return analysis_results
+
+
+def perform_anova_tukey(json_file_path, metric='p_bullet_dmg'):
+    # Step 1: Load JSON data
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+
+    # Step 2: Convert JSON to DataFrame
+    records = []
+    for cluster, games in data.items():
+        for game, metrics in games.items():
+            if metric in metrics:
+                records.append({
+                    'Cluster': cluster,
+                    'Game': game,
+                    'Metric': metrics[metric]
+                })
+
+    df = pd.DataFrame(records)
+
+    # Step 3: Perform ANOVA
+    model = sm.formula.ols('Metric ~ C(Cluster)', data=df).fit()
+    anova_table = sm.stats.anova_lm(model, typ=2)
+    print("ANOVA Results:\n", anova_table)
+
+    # Step 4: Perform Tukey's HSD test if ANOVA is significant
+    if anova_table['PR(>F)'][0] < 0.05:
+        tukey = statsmodels.stats.multicomp.pairwise_tukeyhsd(df['Metric'], df['Cluster'])
+        print("\nTukey's HSD Results:\n", tukey)
+    else:
+        print("\nANOVA was not significant; Tukey's HSD not performed.")
 
 
 def visualize_cluster_analysis(analysis_results, show_plots=True, save_plots=False):
@@ -508,7 +569,7 @@ if __name__ == "__main__":
     model = Clustering(sample_data)
 
     # K-MEANS CLUSTERING:
-    k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=5)
+    # k_assignments, k_importance, k_stats = model.kmeans_clustering(n_clusters=5)
     # print_kmeans_stats(k_assignments, k_importance, k_stats)
 
     # K-MEANS OPTIMIZATION:
@@ -523,37 +584,40 @@ if __name__ == "__main__":
     # print(summary)
 
     # PCA PLOTTING:
-    c_dict = {}
-    for file, cluster in k_assignments.items():
-        c_dict[file] = int(cluster)
+    # c_dict = {}
+    # for file, cluster in k_assignments.items():
+    #     c_dict[file] = int(cluster)
+    #
+    # plot, dataframe = display_pca(sample_data, c_dict, shaded=True)
+    # # plot.show()
 
-    plot, dataframe = display_pca(sample_data, c_dict, shaded=True)
-    # plot.show()
+    # clusters = {
+    #     'Cluster 0': {},
+    #     'Cluster 1': {},
+    #     'Cluster 2': {},
+    #     'Cluster 3': {},
+    #     'Cluster 4': {}
+    # }
 
-    clusters = {
-        'Cluster 0': {},
-        'Cluster 1': {},
-        'Cluster 2': {},
-        'Cluster 3': {},
-        'Cluster 4': {}
-    }
+    # ANOVA ANALYSIS:
+    # dataframe = dataframe.drop(['principal component 1', 'principal component 2'], axis=1)
+    #
+    # # Iterate through sample_data and add to the corresponding cluster
+    # for filename, data in sample_data.items():
+    #     # Find the class of the current filename in file_data
+    #     cluster_class = dataframe.loc[dataframe['filename'] == filename, 'cluster'].values
+    #     if cluster_class.size > 0:  # Check if filename was found in file_data
+    #         cluster_key = f'Cluster {cluster_class[0]}'
+    #         clusters[cluster_key][filename] = data
 
-    # ANALYSIS PLOTTING:
-    dataframe = dataframe.drop(['principal component 1', 'principal component 2'], axis=1)
+    # with open('misc/clusters_5.json', 'w') as file:
+    #     json.dump(clusters, file)
 
-    # Iterate through sample_data and add to the corresponding cluster
-    for filename, data in sample_data.items():
-        # Find the class of the current filename in file_data
-        cluster_class = dataframe.loc[dataframe['filename'] == filename, 'cluster'].values
-        if cluster_class.size > 0:  # Check if filename was found in file_data
-            cluster_key = f'Cluster {cluster_class[0]}'
-            clusters[cluster_key][filename] = data
+    # feature_data = load_and_preprocess_data('misc/clusters_5.json')
+    # analysis_results = analyze_clusters_raw(feature_data)
+    # figures = visualize_cluster_analysis(analysis_results)
 
-    with open('misc/clusters_5.json', 'w') as file:
-        json.dump(clusters, file)
-
-    feature_data = load_and_preprocess_data('misc/clusters_5.json')
-    analysis_results = analyze_clusters_raw(feature_data)
-    figures = visualize_cluster_analysis(analysis_results)
+    # TUKEY ANALYSIS:
+    perform_anova_tukey('misc/clusters_5.json', metric='p_water_dmg')
 
 
