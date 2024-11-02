@@ -1,0 +1,40 @@
+Analysis Results for average_bullet_time
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 264.498
+  Q1: 226.056
+  Q3: 308.342
+  Min: 0.000
+  Max: 505.444
+  N: 75
+
+Cluster Cluster 1:
+  Median: 270.115
+  Q1: 0.000
+  Q3: 315.517
+  Min: 0.000
+  Max: 472.387
+  N: 25
+
+Cluster Cluster 2:
+  Median: 0.000
+  Q1: 0.000
+  Q3: 0.000
+  Min: 0.000
+  Max: 0.000
+  N: 11
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 26.283
+p-value: 1.962e-06
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 2: p = 9.015e-07
+  Cluster 1 vs Cluster 2: p = 3.307e-04

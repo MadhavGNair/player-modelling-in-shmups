@@ -1,31 +1,45 @@
-def display_pca(data, cluster_dict):
-    filenames = list(data.keys())
-    features = list(data[filenames[0]].keys())
+def analyze_clusters_raw(feature_data):
+    feature_comparisons = {}
 
-    # convert to numpy array
-    X = np.array([[data[fname][feat] for feat in features] for fname in filenames])
+    for feature_name, cluster_values in feature_data.items():
+        # Calculate statistics for each cluster
+        cluster_stats = {}
+        raw_values = []
+        labels = []
 
-    # standardize the features
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-    pca = PCA(n_components=2)
-    principal_components = pca.fit_transform(X_scaled)
-    principal_df = pd.DataFrame(principal_components, columns=['principal component 1', 'principal component 2'])
-    finalDf = pd.concat([principal_df, pd.DataFrame(filenames)], axis=1)
-    finalDf.rename(columns={0: 'filename'}, inplace=True)
+        for cluster_id, values in cluster_values.items():
+            cluster_stats[cluster_id] = {
+                'mean': np.mean(values),
+                'std': np.std(values),
+                'n': len(values)
+            }
+            raw_values.append(values)
+            labels.extend([cluster_id] * len(values))
 
-    finalDf['cluster'] = [cluster_dict[name] for name in filenames]
+        # Perform one-way ANOVA using raw values
+        if len(raw_values) > 1:
+            f_statistic, p_value = stats.f_oneway(*raw_values)
 
-    fig = plt.figure(figsize=(8, 8))
-    ax = fig.add_subplot(1, 1, 1)
-    ax.set_xlabel('Principal Component 1')
-    ax.set_ylabel('Principal Component 2')
-    ax.set_title('PCA')
-    cluster_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
-                      '#46f0f0', '#f032e6', '#bcf60c', '#fabebe']
-    for c in set(finalDf['cluster']):
-        cluster_data = finalDf.loc[finalDf['cluster'] == c]
-        ax.scatter(cluster_data['principal component 1'], cluster_data['principal component 2'], c=cluster_colors[c],
-                   label=str(c))
+            feature_comparisons[feature_name] = {
+                'cluster_stats': cluster_stats,
+                'anova': {
+                    'f_statistic': f_statistic,
+                    'p_value': p_value
+                },
+                'significant_difference': bool(p_value < 0.05)
+            }
 
-    return plt, finalDf
+            if p_value < 0.05:
+                all_values = np.concatenate(raw_values)
+                tukey_result = statsmodels.stats.multicomp.pairwise_tukeyhsd(endog=all_values,
+                                                                             groups=labels, alpha=0.05)
+
+                write_tukey_hsd_to_file(feature_name, tukey_result)
+
+    analysis_results = {
+        'num_clusters': len(next(iter(feature_data.values()))),
+        'feature_comparisons': feature_comparisons
+    }
+
+    return analysis_results
+

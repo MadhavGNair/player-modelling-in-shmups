@@ -1,23 +1,26 @@
 import json
+import os
+from collections import defaultdict
+from datetime import datetime
+
+import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from collections import defaultdict
-
 import scipy.stats as stats
 import statsmodels.api as sm
-from kneed import KneeLocator
 import statsmodels.stats.multicomp
+from kneed import KneeLocator
+from matplotlib.gridspec import GridSpec
+from scikit_posthocs import posthoc_dunn
 from scipy.spatial import ConvexHull
 from scipy.spatial.distance import cdist
-
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from matplotlib.gridspec import GridSpec
-
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
+from sklearn.preprocessing import StandardScaler
+
+from vizualization import visualize_cluster_analysis
 
 
 def print_kmeans_stats(assignments, importance, stats):
@@ -358,71 +361,71 @@ def perform_anova_tukey(json_file_path, metric='p_bullet_dmg'):
         print("\nANOVA was not significant; Tukey's HSD not performed.")
 
 
-def visualize_cluster_analysis(analysis_results, show_plots=True, save_plots=False):
-    figures = []
-
-    for feature, comparison in analysis_results['feature_comparisons'].items():
-        # Create a new figure for each feature
-        fig, ax = plt.subplots(figsize=(12, 7))
-
-        # Prepare data for plotting
-        cluster_ids = list(comparison['cluster_stats'].keys())
-        means = [stats['mean'] for stats in comparison['cluster_stats'].values()]
-        stds = [stats['std'] for stats in comparison['cluster_stats'].values()]
-        ns = [stats['n'] for stats in comparison['cluster_stats'].values()]
-
-        # Create bar plot with error bars
-        bars = ax.bar(range(len(means)), means, yerr=stds, capsize=5,
-                      color='skyblue', edgecolor='black')
-
-        # Customize the plot
-        ax.set_title(f'{feature} Means Across Clusters', fontsize=15)
-        ax.set_xlabel('Cluster ID', fontsize=12)
-        ax.set_ylabel('Mean Value', fontsize=12)
-        ax.set_xticks(range(len(means)))
-        ax.set_xticklabels(cluster_ids)
-
-        # Add value labels on top of each bar
-        for i, bar in enumerate(bars):
-            height = bar.get_height()
-            ax.text(bar.get_x(), height,
-                    f'Mean: {means[i]:.3f}\n±{stds[i]:.3f}\nn={ns[i]}',
-                    ha='left', va='bottom')
-
-        # Annotate ANOVA results
-        anova_text = (
-            f"ANOVA Results:\n"
-            f"F-statistic: {comparison['anova']['f_statistic']:.3f}\n"
-            f"p-value: {comparison['anova']['p_value']:.4f}\n"
-        )
-        significance_text = "Statistically Significant" if comparison[
-            'significant_difference'] else "Not Statistically Significant"
-
-        props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
-        if feature in ['p_left', 'p_bullets_fired', 'p_bullets_missed', 'average_bullet_time']:
-            ax.text(0.80, 0.97, anova_text + significance_text,
-                    transform=ax.transAxes, fontsize=10,
-                    verticalalignment='top', bbox=props)
-        elif feature in ['p_right']:
-            ax.text(0.38, 0.97, anova_text + significance_text,
-                    transform=ax.transAxes, fontsize=10,
-                    verticalalignment='top', bbox=props)
-        else:
-            ax.text(0.02, 0.97, anova_text + significance_text,
-                    transform=ax.transAxes, fontsize=10,
-                    verticalalignment='top', bbox=props)
-
-        plt.tight_layout()
-
-        if show_plots:
-            plt.show()
-
-        if save_plots:
-            plt.savefig(f'./figures/{feature}_cluster_analysis.png')
-
-        figures.append(fig)
-
-    return figures
+# def visualize_cluster_analysis(analysis_results, show_plots=True, save_plots=False):
+#     figures = []
+#
+#     for feature, comparison in analysis_results['feature_comparisons'].items():
+#         # Create a new figure for each feature
+#         fig, ax = plt.subplots(figsize=(12, 7))
+#
+#         # Prepare data for plotting
+#         cluster_ids = list(comparison['cluster_stats'].keys())
+#         means = [stats['mean'] for stats in comparison['cluster_stats'].values()]
+#         stds = [stats['std'] for stats in comparison['cluster_stats'].values()]
+#         ns = [stats['n'] for stats in comparison['cluster_stats'].values()]
+#
+#         # Create bar plot with error bars
+#         bars = ax.bar(range(len(means)), means, yerr=stds, capsize=5,
+#                       color='skyblue', edgecolor='black')
+#
+#         # Customize the plot
+#         ax.set_title(f'{feature} Means Across Clusters', fontsize=15)
+#         ax.set_xlabel('Cluster ID', fontsize=12)
+#         ax.set_ylabel('Mean Value', fontsize=12)
+#         ax.set_xticks(range(len(means)))
+#         ax.set_xticklabels(cluster_ids)
+#
+#         # Add value labels on top of each bar
+#         for i, bar in enumerate(bars):
+#             height = bar.get_height()
+#             ax.text(bar.get_x(), height,
+#                     f'Mean: {means[i]:.3f}\n±{stds[i]:.3f}\nn={ns[i]}',
+#                     ha='left', va='bottom')
+#
+#         # Annotate ANOVA results
+#         anova_text = (
+#             f"ANOVA Results:\n"
+#             f"F-statistic: {comparison['anova']['f_statistic']:.3f}\n"
+#             f"p-value: {comparison['anova']['p_value']:.4f}\n"
+#         )
+#         significance_text = "Statistically Significant" if comparison[
+#             'significant_difference'] else "Not Statistically Significant"
+#
+#         props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+#         if feature in ['p_left', 'p_bullets_fired', 'p_bullets_missed', 'average_bullet_time']:
+#             ax.text(0.80, 0.97, anova_text + significance_text,
+#                     transform=ax.transAxes, fontsize=10,
+#                     verticalalignment='top', bbox=props)
+#         elif feature in ['p_right']:
+#             ax.text(0.38, 0.97, anova_text + significance_text,
+#                     transform=ax.transAxes, fontsize=10,
+#                     verticalalignment='top', bbox=props)
+#         else:
+#             ax.text(0.02, 0.97, anova_text + significance_text,
+#                     transform=ax.transAxes, fontsize=10,
+#                     verticalalignment='top', bbox=props)
+#
+#         plt.tight_layout()
+#
+#         if show_plots:
+#             plt.show()
+#
+#         if save_plots:
+#             plt.savefig(f'./figures/{feature}_cluster_analysis.png')
+#
+#         figures.append(fig)
+#
+#     return figures
 
 
 def plot_optimization_results(optimization_results):
@@ -561,6 +564,200 @@ def plot_elbow(optimization_results, figsize=(12, 6)):
 
     plt.tight_layout()
     return fig
+
+
+def analyze_clusters_nonparametric(feature_data, output_dir="analysis_results"):
+    """
+    Analyze cluster differences using non-parametric tests (Kruskal-Wallis and Dunn's test)
+    for non-normal distributions.
+
+    Parameters:
+    feature_data (dict): Dictionary with feature names as keys and nested dictionaries
+                        containing cluster IDs and their corresponding values
+    output_dir (str): Directory to save the analysis results
+
+    Returns:
+    dict: Analysis results including test statistics and cluster statistics
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    feature_comparisons = {}
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    for feature_name, cluster_values in feature_data.items():
+        # Calculate statistics for each cluster
+        cluster_stats = {}
+        raw_values = []
+        labels = []
+
+        # Prepare data for analysis
+        for cluster_id, values in cluster_values.items():
+            # Calculate descriptive statistics
+            cluster_stats[cluster_id] = {
+                'median': np.median(values),
+                'q1': np.percentile(values, 25),
+                'q3': np.percentile(values, 75),
+                'min': np.min(values),
+                'max': np.max(values),
+                'n': len(values)
+            }
+            raw_values.extend(values)
+            labels.extend([cluster_id] * len(values))
+
+        # Convert to numpy arrays for analysis
+        raw_values = np.array(raw_values)
+        labels = np.array(labels)
+
+        # Perform Kruskal-Wallis H-test
+        h_statistic, p_value = stats.kruskal(*[
+            cluster_values[cluster_id] for cluster_id in cluster_values.keys()
+        ])
+
+        # Store results
+        feature_results = {
+            'cluster_stats': cluster_stats,
+            'kruskal_wallis': {
+                'h_statistic': h_statistic,
+                'p_value': p_value
+            },
+            'significant_difference': bool(p_value < 0.05)
+        }
+
+        # If significant difference found, perform Dunn's test
+        if p_value < 0.05:
+            # Create DataFrame for Dunn's test
+            df = pd.DataFrame({
+                'values': raw_values,
+                'groups': labels
+            })
+
+            # Perform Dunn's test
+            dunn_result = posthoc_dunn(
+                df,
+                val_col='values',
+                group_col='groups',
+                p_adjust='bonferroni'
+            )
+
+            # Store Dunn's test results
+            feature_results['dunns_test'] = {
+                'p_values': dunn_result.to_dict()
+            }
+
+            # Generate pairwise comparison summary
+            significant_pairs = []
+            for idx, row in dunn_result.iterrows():
+                for col in dunn_result.columns:
+                    if idx < col:  # Avoid duplicate comparisons
+                        p_val = dunn_result.loc[idx, col]
+                        if p_val < 0.05:
+                            significant_pairs.append({
+                                'cluster_pair': f'{idx} vs {col}',
+                                'p_value': p_val
+                            })
+
+            feature_results['significant_pairs'] = significant_pairs
+
+        feature_comparisons[feature_name] = feature_results
+
+        # Save detailed results to file
+        save_detailed_results(
+            feature_name,
+            feature_results,
+            output_dir,
+            timestamp
+        )
+
+    # Create and save summary report
+    summary_report = create_summary_report(feature_comparisons)
+    save_summary_report(summary_report, output_dir, timestamp)
+
+    return {
+        'num_clusters': len(next(iter(feature_data.values()))),
+        'feature_comparisons': feature_comparisons,
+        'summary': summary_report
+    }
+
+
+def save_detailed_results(feature_name, results, output_dir, timestamp):
+    """Save detailed analysis results for each feature."""
+    filename = f"{output_dir}/detailed_{feature_name}_{timestamp}.txt"
+
+    with open(filename, 'w') as f:
+        f.write(f"Analysis Results for {feature_name}\n")
+        f.write("=" * 50 + "\n\n")
+
+        # Write cluster statistics
+        f.write("Cluster Statistics:\n")
+        f.write("-" * 20 + "\n")
+        for cluster_id, stats in results['cluster_stats'].items():
+            f.write(f"\nCluster {cluster_id}:\n")
+            f.write(f"  Median: {stats['median']:.3f}\n")
+            f.write(f"  Q1: {stats['q1']:.3f}\n")
+            f.write(f"  Q3: {stats['q3']:.3f}\n")
+            f.write(f"  Min: {stats['min']:.3f}\n")
+            f.write(f"  Max: {stats['max']:.3f}\n")
+            f.write(f"  N: {stats['n']}\n")
+
+        # Write Kruskal-Wallis results
+        f.write("\nKruskal-Wallis Test Results:\n")
+        f.write("-" * 20 + "\n")
+        f.write(f"H-statistic: {results['kruskal_wallis']['h_statistic']:.3f}\n")
+        f.write(f"p-value: {results['kruskal_wallis']['p_value']:.3e}\n")
+
+        # Write Dunn's test results if available
+        if 'dunns_test' in results:
+            f.write("\nDunn's Test Results:\n")
+            f.write("-" * 20 + "\n")
+            f.write("Significant Pairwise Comparisons:\n")
+            for pair in results['significant_pairs']:
+                f.write(f"  {pair['cluster_pair']}: p = {pair['p_value']:.3e}\n")
+
+
+def create_summary_report(feature_comparisons):
+    """Create a summary report of all analyses."""
+    summary = {
+        'total_features': len(feature_comparisons),
+        'significant_features': 0,
+        'feature_summary': {}
+    }
+
+    for feature_name, results in feature_comparisons.items():
+        feature_summary = {
+            'significant': results['significant_difference'],
+            'p_value': results['kruskal_wallis']['p_value'],
+            'num_significant_pairs': len(results.get('significant_pairs', []))
+        }
+
+        if results['significant_difference']:
+            summary['significant_features'] += 1
+
+        summary['feature_summary'][feature_name] = feature_summary
+
+    return summary
+
+
+def save_summary_report(summary, output_dir, timestamp):
+    """Save the summary report to a file."""
+    filename = f"{output_dir}/summary_report_{timestamp}.txt"
+
+    with open(filename, 'w') as f:
+        f.write("Analysis Summary Report\n")
+        f.write("=" * 50 + "\n\n")
+
+        f.write(f"Total features analyzed: {summary['total_features']}\n")
+        f.write(f"Features with significant differences: {summary['significant_features']}\n\n")
+
+        f.write("Feature-by-Feature Summary:\n")
+        f.write("-" * 20 + "\n")
+
+        for feature_name, results in summary['feature_summary'].items():
+            f.write(f"\n{feature_name}:\n")
+            f.write(f"  Significant differences: {'Yes' if results['significant'] else 'No'}\n")
+            if results['significant']:
+                f.write(f"  p-value: {results['p_value']:.3e}\n")
+                f.write(f"  Number of significant pairs: {results['num_significant_pairs']}\n")
 
 
 class Clustering:
@@ -708,35 +905,37 @@ if __name__ == "__main__":
     # print(summary)
 
     # PCA PLOTTING:
-    # c_dict = {}
-    # for file, cluster in k_assignments.items():
-    #     c_dict[file] = int(cluster)
-    #
-    # plot, dataframe = display_pca(sample_data, c_dict, shaded=False)
-    # # plot.show()
-    #
-    # clusters = {
-    #     'Cluster 0': {},
-    #     'Cluster 1': {},
-    #     'Cluster 2': {}
-    # }
+    c_dict = {}
+    for file, cluster in k_assignments.items():
+        c_dict[file] = int(cluster)
 
-    # ANOVA ANALYSIS:
-    # dataframe = dataframe.drop(['principal component 1', 'principal component 2'], axis=1)
-    #
-    # # Iterate through sample_data and add to the corresponding cluster
-    # for filename, data in sample_data.items():
-    #     # Find the class of the current filename in file_data
-    #     cluster_class = dataframe.loc[dataframe['filename'] == filename, 'cluster'].values
-    #     if cluster_class.size > 0:  # Check if filename was found in file_data
-    #         cluster_key = f'Cluster {cluster_class[0]}'
-    #         clusters[cluster_key][filename] = data
-    #
-    # with open('clusters_3.json', 'w') as file:
-    #     json.dump(clusters, file)
+    plot, dataframe = display_pca(sample_data, c_dict, shaded=False)
+    # plot.show()
 
-    # feature_data = load_and_preprocess_data('clusters_3.json')
-    # # anova_assumptions = test_anova_assumptions(feature_data)
+    clusters = {
+        'Cluster 0': {},
+        'Cluster 1': {},
+        'Cluster 2': {}
+    }
+
+    # NON-PARAMETRIC ANALYSIS:
+    dataframe = dataframe.drop(['principal component 1', 'principal component 2'], axis=1)
+
+    # Iterate through sample_data and add to the corresponding cluster
+    for filename, data in sample_data.items():
+        # Find the class of the current filename in file_data
+        cluster_class = dataframe.loc[dataframe['filename'] == filename, 'cluster'].values
+        if cluster_class.size > 0:  # Check if filename was found in file_data
+            cluster_key = f'Cluster {cluster_class[0]}'
+            clusters[cluster_key][filename] = data
+
+    with open('clusters_3.json', 'w') as file:
+        json.dump(clusters, file)
+
+    feature_data = load_and_preprocess_data('clusters_3.json')
+    # anova_assumptions = test_anova_assumptions(feature_data)
+    results = analyze_clusters_nonparametric(feature_data)
+    visualize_cluster_analysis(feature_data, results)
     # analysis_results = analyze_clusters_raw(feature_data)
     # figures = visualize_cluster_analysis(analysis_results)
 

@@ -1,0 +1,58 @@
+Analysis Summary Report
+==================================================
+
+Total features analyzed: 10
+Features with significant differences: 10
+
+Feature-by-Feature Summary:
+--------------------
+
+p_bullet_dmg:
+  Significant differences: Yes
+  p-value: 2.329e-09
+  Number of significant pairs: 3
+
+p_water_dmg:
+  Significant differences: Yes
+  p-value: 2.655e-06
+  Number of significant pairs: 3
+
+p_collision_dmg:
+  Significant differences: Yes
+  p-value: 9.943e-07
+  Number of significant pairs: 1
+
+average_healing_percentage:
+  Significant differences: Yes
+  p-value: 2.023e-05
+  Number of significant pairs: 1
+
+p_bullets_fired:
+  Significant differences: Yes
+  p-value: 8.217e-12
+  Number of significant pairs: 2
+
+p_bullets_missed:
+  Significant differences: Yes
+  p-value: 1.953e-09
+  Number of significant pairs: 3
+
+average_bullet_time:
+  Significant differences: Yes
+  p-value: 1.962e-06
+  Number of significant pairs: 2
+
+p_accelerated:
+  Significant differences: Yes
+  p-value: 4.940e-12
+  Number of significant pairs: 2
+
+p_right:
+  Significant differences: Yes
+  p-value: 2.205e-08
+  Number of significant pairs: 1
+
+p_left:
+  Significant differences: Yes
+  p-value: 1.022e-08
+  Number of significant pairs: 2

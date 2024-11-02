@@ -1,0 +1,9 @@
+Tukey's HSD Results:
+    Multiple Comparison of Means - Tukey HSD, FWER=0.05
+==========================================================
+  group1    group2  meandiff p-adj   lower   upper  reject
+----------------------------------------------------------
+Cluster 0 Cluster 1  -0.0728    0.0 -0.0988 -0.0468   True
+Cluster 0 Cluster 2  -0.0453 0.0105 -0.0817 -0.0089   True
+Cluster 1 Cluster 2   0.0275 0.2496 -0.0133  0.0682  False
+----------------------------------------------------------

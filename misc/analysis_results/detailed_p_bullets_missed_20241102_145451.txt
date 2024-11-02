@@ -1,0 +1,41 @@
+Analysis Results for p_bullets_missed
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.770
+  Q1: 0.693
+  Q3: 0.826
+  Min: 0.431
+  Max: 0.954
+  N: 75
+
+Cluster Cluster 1:
+  Median: 0.543
+  Q1: 0.440
+  Q3: 0.747
+  Min: 0.000
+  Max: 1.000
+  N: 25
+
+Cluster Cluster 2:
+  Median: 0.000
+  Q1: 0.000
+  Q3: 0.000
+  Min: 0.000
+  Max: 0.000
+  N: 11
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 40.108
+p-value: 1.953e-09
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 7.403e-04
+  Cluster 0 vs Cluster 2: p = 2.897e-08
+  Cluster 1 vs Cluster 2: p = 1.634e-02

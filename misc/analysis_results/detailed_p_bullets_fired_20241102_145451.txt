@@ -1,0 +1,40 @@
+Analysis Results for p_bullets_fired
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.052
+  Q1: 0.042
+  Q3: 0.070
+  Min: 0.018
+  Max: 0.134
+  N: 75
+
+Cluster Cluster 1:
+  Median: 0.030
+  Q1: 0.003
+  Q3: 0.035
+  Min: 0.000
+  Max: 0.071
+  N: 25
+
+Cluster Cluster 2:
+  Median: 0.000
+  Q1: 0.000
+  Q3: 0.000
+  Min: 0.000
+  Max: 0.000
+  N: 11
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 51.050
+p-value: 8.217e-12
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 2.374e-06
+  Cluster 0 vs Cluster 2: p = 7.380e-09

@@ -75,7 +75,7 @@ def process_csv_file(file_path):
                     # calculate the healing interval time
                     healing_time = df.loc[i, 'Timestamp'] - last_healing_event_time
                     # calculate the percentage of healing time with respect to the total time
-                    healing_percentage = (healing_time / total_time) * 100
+                    healing_percentage = (healing_time / total_time)
                     # Append the percentage to the list
                     healing_percentages.append(healing_percentage)
 

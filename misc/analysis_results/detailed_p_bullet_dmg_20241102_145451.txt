@@ -1,0 +1,41 @@
+Analysis Results for p_bullet_dmg
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.444
+  Q1: 0.287
+  Q3: 0.578
+  Min: 0.096
+  Max: 0.797
+  N: 75
+
+Cluster Cluster 1:
+  Median: 0.732
+  Q1: 0.650
+  Q3: 0.818
+  Min: 0.120
+  Max: 0.900
+  N: 25
+
+Cluster Cluster 2:
+  Median: 0.222
+  Q1: 0.190
+  Q3: 0.311
+  Min: 0.000
+  Max: 0.586
+  N: 11
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 39.756
+p-value: 2.329e-09
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 5.116e-07
+  Cluster 0 vs Cluster 2: p = 3.406e-02
+  Cluster 1 vs Cluster 2: p = 6.558e-08

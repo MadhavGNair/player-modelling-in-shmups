@@ -1,0 +1,39 @@
+Analysis Results for p_right
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.177
+  Q1: 0.144
+  Q3: 0.204
+  Min: 0.073
+  Max: 0.332
+  N: 75
+
+Cluster Cluster 1:
+  Median: 0.108
+  Q1: 0.075
+  Q3: 0.130
+  Min: 0.035
+  Max: 0.157
+  N: 25
+
+Cluster Cluster 2:
+  Median: 0.163
+  Q1: 0.088
+  Q3: 0.183
+  Min: 0.000
+  Max: 0.209
+  N: 11
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 35.260
+p-value: 2.205e-08
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 1.372e-08

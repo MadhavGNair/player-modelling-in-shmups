@@ -1,0 +1,271 @@
+{
+  "p_bullet_dmg": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.966325695022254,
+        "p_value": 0.0432799787005865,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.8480618003441542,
+        "p_value": 0.0016185184764626788,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.948771633870558,
+        "p_value": 0.6282969521044162,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 1.7084240897212568,
+      "p_value": 0.1860098251167054,
+      "equal_variances": true
+    },
+    "assumptions_met": false
+  },
+  "p_water_dmg": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.6996644950622017,
+        "p_value": 4.265776311839735e-11,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.31245970803984435,
+        "p_value": 8.179382752995523e-10,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.9619506742278932,
+        "p_value": 0.7957720429370252,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 4.881696527028243,
+      "p_value": 0.009339551940903346,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "p_collision_dmg": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9800131920470073,
+        "p_value": 0.28265796805652066,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.8292364971213498,
+        "p_value": 0.0007286310577559725,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.9871491946349157,
+        "p_value": 0.9930709659870196,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 0.17819413508672755,
+      "p_value": 0.8370254777022528,
+      "equal_variances": true
+    },
+    "assumptions_met": false
+  },
+  "average_healing_percentage": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.6388749601557198,
+        "p_value": 2.725186337273084e-12,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.7761762604975311,
+        "p_value": 9.341397585481518e-05,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.8440007614438132,
+        "p_value": 0.03562957082382533,
+        "normal_distribution": false
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 17.390114209773255,
+      "p_value": 2.836657398061691e-07,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "p_bullets_fired": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9552538642406229,
+        "p_value": 0.00978652268781548,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.9085950353668154,
+        "p_value": 0.028360667056506736,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 1.0,
+        "p_value": 1.0,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 7.844603302719118,
+      "p_value": 0.0006591213692297902,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "p_bullets_missed": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9783914464956641,
+        "p_value": 0.22804951390858164,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.9040822402490513,
+        "p_value": 0.022536803642949965,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 1.0,
+        "p_value": 1.0,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 28.85964639649595,
+      "p_value": 9.093623038113208e-11,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "average_bullet_time": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9641675706287409,
+        "p_value": 0.03219691668480798,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.8804464904863666,
+        "p_value": 0.007058779863930863,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 1.0,
+        "p_value": 1.0,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 16.52665672678433,
+      "p_value": 5.472490289467428e-07,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "p_accelerated": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9707518145914082,
+        "p_value": 0.07983442136699936,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.9542789048081411,
+        "p_value": 0.31230638276540124,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.9479781130077555,
+        "p_value": 0.6182336065175345,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 6.265595832238142,
+      "p_value": 0.0026638666281585954,
+      "equal_variances": false
+    },
+    "assumptions_met": false
+  },
+  "p_right": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9729311972832391,
+        "p_value": 0.10801890455644242,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.9548765912913844,
+        "p_value": 0.3218886700031651,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.8555793608516068,
+        "p_value": 0.05045242187652021,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 3.054755471449394,
+      "p_value": 0.05122750656498022,
+      "equal_variances": true
+    },
+    "assumptions_met": true
+  },
+  "p_left": {
+    "normality_tests": {
+      "cluster_Cluster 0": {
+        "statistic": 0.9859230701586018,
+        "p_value": 0.5754654749053745,
+        "normal_distribution": true
+      },
+      "cluster_Cluster 1": {
+        "statistic": 0.8644467042735342,
+        "p_value": 0.0033538620399094967,
+        "normal_distribution": false
+      },
+      "cluster_Cluster 2": {
+        "statistic": 0.9481817239648249,
+        "p_value": 0.620811539090279,
+        "normal_distribution": true
+      }
+    },
+    "homogeneity_test": {
+      "statistic": 1.6501374076689377,
+      "p_value": 0.19682760873504979,
+      "equal_variances": true
+    },
+    "assumptions_met": false
+  },
+  "summary": {
+    "total_features": 10,
+    "normality_violations": 8,
+    "homogeneity_violations": 6,
+    "features_with_violations": [
+      "p_bullet_dmg",
+      "p_water_dmg",
+      "p_collision_dmg",
+      "average_healing_percentage",
+      "p_bullets_fired",
+      "p_bullets_missed",
+      "average_bullet_time",
+      "p_accelerated",
+      "p_left"
+    ],
+    "features_meeting_assumptions": [
+      "p_right"
+    ]
+  }
+}
