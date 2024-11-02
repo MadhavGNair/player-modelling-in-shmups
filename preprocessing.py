@@ -30,14 +30,35 @@ def fix_csv(base_dir):
 
     print("CSV files processed and temp files created successfully.")
 
+def explore_csv_file(file_path):
+    try:
+        res = {}
+        # read the csv
+        df = pd.read_csv(file_path)
+        value_counts = df[' Event'].value_counts()
+
+        # Get all event values and add to dict
+        res['accel'] = value_counts.get('Accelerate')
+        res['right'] = value_counts.get('Turn Right')
+        res['left'] = value_counts.get('Turn Left')
+        res['bullet_fired'] = value_counts.get('Bullet Fired')
+        res['bullet_missed'] = value_counts.get('Bullet Missed')
+        res['enemy_killed'] = value_counts.get('Enemy killed')
+        res['enemy_collision'] = value_counts.get('Enemy collision')
+        res['time'] = df['Timestamp'].iloc[-2] - df['Timestamp'].iloc[0]
+        res['damage_taken'] = df.loc[df[" Event"] == "Damage taken", " Value"].sum()
+        res['bullet_distances'] = df.loc[df[" Event"] == "Enemy hit", " Value"].to_list()
+
+        return res
+    
+    except Exception as e:
+        print(f"Error processing {file_path.name}: {str(e)}")
 
 def process_csv_file(file_path):
     GLOBAL_DICT[file_path.name] = {}
     try:
         # read the csv
         df = pd.read_csv(file_path)
-
-        # DATA EXPLORATION
 
         # FEATURE EXTRACTION
         water_dmg = 0
@@ -148,8 +169,10 @@ def process_csv_file(file_path):
         print(f"Error processing {file_path.name}: {str(e)}")
 
 
-def process_user_folders(main_path):
+def process_user_folders(main_path, method = "pre-process"):
     main_dir = Path(main_path)
+    if method == "exploration":
+        dicts = []
 
     # get all directories
     user_dirs = [d for d in main_dir.iterdir()
@@ -171,8 +194,18 @@ def process_user_folders(main_path):
             print(i)
 
         # process each relevant CSV file
-        for file_path in csv_files:
-            process_csv_file(file_path)
+        match method:
+            case "exploration":
+                for file_path in csv_files:
+                    dicts.append(explore_csv_file(file_path))
+            case "pre-process":
+                for file_path in csv_files:
+                    process_csv_file(file_path)
+            case _:
+                raise ValueError("Unknown method")
+        
+    if method == "exploration":
+        return dicts
 
 
 def count_pdfs(folder_path):
