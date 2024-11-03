@@ -5,6 +5,7 @@ from datetime import datetime
 
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
+from matplotlib.colors import to_rgba
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
@@ -883,6 +884,126 @@ class Clustering:
         return cluster_assignments, feature_importance, dict(cluster_stats)
 
 
+def find_optimal_k(X, k_range):
+    """
+    Find optimal k using silhouette scores.
+
+    Parameters:
+    X (numpy.ndarray): Input data
+    k_range (list): Range of k values to test
+
+    Returns:
+    tuple: (optimal k value, dictionary of silhouette scores)
+    """
+    silhouette_scores = {}
+
+    for k in k_range:
+        kmeans = KMeans(n_clusters=k, random_state=42)
+        cluster_labels = kmeans.fit_predict(X)
+        silhouette_avg = silhouette_score(X, cluster_labels)
+        silhouette_scores[k] = silhouette_avg
+
+    optimal_k = max(silhouette_scores.items(), key=lambda x: x[1])[0]
+    return optimal_k, silhouette_scores
+
+
+def plot_silhouette_scores(silhouette_scores, optimal_k):
+    """
+    Plot silhouette scores for different k values.
+    """
+    plt.figure(figsize=(10, 6))
+    plt.plot(list(silhouette_scores.keys()), list(silhouette_scores.values()),
+             marker='o', linestyle='-', linewidth=2, markersize=8)
+    plt.axvline(x=optimal_k, color='r', linestyle='--', label=f'Optimal k = {optimal_k}')
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.xlabel('Number of Clusters (k)')
+    plt.ylabel('Silhouette Score')
+    plt.title('Silhouette Score vs Number of Clusters')
+    plt.legend()
+    plt.show()
+
+
+def pca_analysis(df):
+    df = df.drop(['cluster'], axis=1)
+
+    X = df[['principal component 1', 'principal component 2']].values
+
+    k_range = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    # Find optimal k
+    optimal_k, silhouette_scores = find_optimal_k(X, k_range)
+
+    # Plot silhouette scores
+    # plot_silhouette_scores(silhouette_scores, optimal_k)
+
+    # Perform final clustering with optimal k
+    kmeans = KMeans(n_clusters=optimal_k, random_state=42)
+    cluster_labels = kmeans.fit_predict(X)
+
+    # Add cluster labels to the dataframe
+    df_with_clusters = df.copy()
+    df_with_clusters['Cluster'] = cluster_labels
+
+    # Create final clustering visualization
+    # plt.figure(figsize=(10, 6))
+    #
+    # # Create a color map
+    # colors = ['#4363d8', '#3cb44b', '#ffe119', '#e6194b', '#f58231', '#911eb4',
+    #                   '#46f0f0', '#f032e6', '#bcf60c', '#fabebe']
+    #
+    # # Create mesh grid for decision boundary
+    # x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
+    # y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
+    # xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100),
+    #                      np.linspace(y_min, y_max, 100))
+    #
+    # # Predict labels for all points in the mesh
+    # Z = kmeans.predict(np.c_[xx.ravel(), yy.ravel()])
+    # Z = Z.reshape(xx.shape)
+    #
+    # # Plot the decision boundary for each cluster
+    # for i in range(optimal_k):
+    #     # Create lighter version of the color for shading
+    #     # color_rgba = to_rgba(colors[i], 0.3)  # Increased alpha to 0.3 for better visibility
+    #
+    #     # Plot shaded region
+    #     # plt.contourf(xx, yy, Z == i, colors=[color_rgba], alpha=0.3)
+    #
+    #     # Plot points
+    #     mask = cluster_labels == i
+    #     plt.scatter(X[mask, 0], X[mask, 1], c=colors[i], label=f'Cluster {i}', zorder=2)
+    #     # color_lighter = mcolors.to_rgba(colors[i], alpha=0.2)
+    #     #
+    #     # # Draw convex hull around the points
+    #     # if len(X) >= 3:  # ConvexHull requires at least 3 points
+    #     #     hull = ConvexHull(X)
+    #     #     vertices = hull.vertices
+    #     #     hull_points = X[vertices]
+    #     #     plt.fill(hull_points[:, 0], hull_points[:, 1], color=color_lighter)
+    #
+    # # Plot cluster centers
+    # centers = kmeans.cluster_centers_
+    # plt.scatter(centers[:, 0], centers[:, 1], c='red', marker='x', s=100,
+    #             linewidth=2, label='Cluster Centers', zorder=3)
+    #
+    # plt.xlabel('Principal Component 1')
+    # plt.ylabel('Principal Component 2')
+    # plt.title(f'K-means Clustering of PCA Results (k={optimal_k})')
+    # plt.legend()
+    #
+    # # Set the plot limits
+    # plt.xlim(x_min, x_max)
+    # plt.ylim(y_min, y_max)
+    #
+    # plt.show()
+    #
+    best_silhouette = silhouette_scores[optimal_k]
+    # print(f"Optimal number of clusters: {optimal_k}")
+    # print(f"Best silhouette score: {best_silhouette:.3f}")
+
+    return df_with_clusters, kmeans, optimal_k, best_silhouette
+
+
 if __name__ == "__main__":
     with open('features.json', 'r') as file:
         sample_data = json.load(file)
@@ -918,26 +1039,67 @@ if __name__ == "__main__":
         'Cluster 2': {}
     }
 
+    df_with_clusters, kmeans, optimal_k, best_silhouette = pca_analysis(dataframe)
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(1, 1, 1)
+    ax.set_xlabel('Principal Component 1')
+    ax.set_ylabel('Principal Component 2')
+    ax.set_title('PCA')
+    cluster_colors = ['#4363d8', '#3cb44b', '#ffe119', '#e6194b', '#f58231', '#911eb4',
+                      '#46f0f0', '#f032e6', '#bcf60c', '#fabebe']
+    centers = kmeans.cluster_centers_
+    plt.scatter(centers[:, 0], centers[:, 1], c='red', marker='x', s=100,
+                linewidth=2, label='Cluster Centers', zorder=3)
+    shaded = True
+    if not shaded:
+        for c in set(df_with_clusters['Cluster']):
+            cluster_data = df_with_clusters.loc[df_with_clusters['Cluster'] == c]
+            ax.scatter(cluster_data['principal component 1'], cluster_data['principal component 2'], c=cluster_colors[c],
+                       label=str(c))
+    else:
+        for c in set(df_with_clusters['Cluster']):
+            cluster_data = df_with_clusters.loc[df_with_clusters['Cluster'] == c]
+            points = cluster_data[['principal component 1', 'principal component 2']].values
+
+            # Plot data points
+            ax.scatter(points[:, 0], points[:, 1], c=cluster_colors[c], label=str(c))
+
+            # Create a lighter shade for cluster region
+            color_lighter = mcolors.to_rgba(cluster_colors[c], alpha=0.2)
+
+            # Draw convex hull around the points
+            if len(points) >= 3:  # ConvexHull requires at least 3 points
+                hull = ConvexHull(points)
+                vertices = hull.vertices
+                hull_points = points[vertices]
+                ax.fill(hull_points[:, 0], hull_points[:, 1], color=color_lighter)
+
+    ax.legend()
+
+    plt.show()
+    # print(f'\nPCA:\n{df_with_clusters.head()}')
+
     # NON-PARAMETRIC ANALYSIS:
-    dataframe = dataframe.drop(['principal component 1', 'principal component 2'], axis=1)
-
-    # Iterate through sample_data and add to the corresponding cluster
-    for filename, data in sample_data.items():
-        # Find the class of the current filename in file_data
-        cluster_class = dataframe.loc[dataframe['filename'] == filename, 'cluster'].values
-        if cluster_class.size > 0:  # Check if filename was found in file_data
-            cluster_key = f'Cluster {cluster_class[0]}'
-            clusters[cluster_key][filename] = data
-
-    with open('clusters_3.json', 'w') as file:
-        json.dump(clusters, file)
-
-    feature_data = load_and_preprocess_data('clusters_3.json')
-    # anova_assumptions = test_anova_assumptions(feature_data)
-    results = analyze_clusters_nonparametric(feature_data)
-    visualize_cluster_analysis(feature_data, results)
-    # analysis_results = analyze_clusters_raw(feature_data)
-    # figures = visualize_cluster_analysis(analysis_results)
+    # dataframe = df_with_clusters.drop(['principal component 1', 'principal component 2'], axis=1)
+    #
+    # # Iterate through sample_data and add to the corresponding cluster
+    # for filename, data in sample_data.items():
+    #     # Find the class of the current filename in file_data
+    #     cluster_class = df_with_clusters.loc[dataframe['filename'] == filename, 'Cluster'].values
+    #     if cluster_class.size > 0:  # Check if filename was found in file_data
+    #         cluster_key = f'Cluster {cluster_class[0]}'
+    #         clusters[cluster_key][filename] = data
+    #
+    # with open('clusters_2.json', 'w') as file:
+    #     json.dump(clusters, file)
+    #
+    # feature_data = load_and_preprocess_data('clusters_2.json')
+    # # anova_assumptions = test_anova_assumptions(feature_data)
+    # results = analyze_clusters_nonparametric(feature_data)
+    # visualize_cluster_analysis(feature_data, results)
+    # # analysis_results = analyze_clusters_raw(feature_data)
+    # # figures = visualize_cluster_analysis(analysis_results)
 
     # TUKEY ANALYSIS:
     # items = ['average_bullet_time', 'average_healing_percentage', 'p_accelerated', 'p_bullet_dmg',
@@ -945,5 +1107,7 @@ if __name__ == "__main__":
     #
     # for i in items:
     #     perform_anova_tukey('clusters_3.json', metric=i)
+
+
 
 

@@ -1,0 +1,31 @@
+Analysis Results for p_accelerated
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.644
+  Q1: 0.602
+  Q3: 0.707
+  Min: 0.484
+  Max: 0.832
+  N: 91
+
+Cluster Cluster 1:
+  Median: 0.800
+  Q1: 0.731
+  Q3: 0.830
+  Min: 0.578
+  Max: 1.000
+  N: 20
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 22.194
+p-value: 2.465e-06
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 2.465e-06

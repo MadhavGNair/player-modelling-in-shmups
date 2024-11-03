@@ -1,0 +1,31 @@
+Analysis Results for p_water_dmg
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.000
+  Q1: 0.000
+  Q3: 0.091
+  Min: 0.000
+  Max: 0.462
+  N: 91
+
+Cluster Cluster 1:
+  Median: 0.077
+  Q1: 0.000
+  Q3: 0.334
+  Min: 0.000
+  Max: 0.516
+  N: 20
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 4.845
+p-value: 2.773e-02
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 2.773e-02

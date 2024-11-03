@@ -1,0 +1,31 @@
+Analysis Results for average_healing_percentage
+==================================================
+
+Cluster Statistics:
+--------------------
+
+Cluster Cluster 0:
+  Median: 0.247
+  Q1: 0.194
+  Q3: 0.330
+  Min: 0.109
+  Max: 1.294
+  N: 91
+
+Cluster Cluster 1:
+  Median: 0.743
+  Q1: 0.251
+  Q3: 1.940
+  Min: 0.000
+  Max: 3.928
+  N: 20
+
+Kruskal-Wallis Test Results:
+--------------------
+H-statistic: 11.397
+p-value: 7.356e-04
+
+Dunn's Test Results:
+--------------------
+Significant Pairwise Comparisons:
+  Cluster 0 vs Cluster 1: p = 7.356e-04
