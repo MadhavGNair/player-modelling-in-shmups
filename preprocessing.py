@@ -4,7 +4,6 @@ import json
 import pandas as pd
 from pathlib import Path
 
-
 GLOBAL_DICT = {}
 
 
@@ -30,6 +29,7 @@ def fix_csv(base_dir):
 
     print("CSV files processed and temp files created successfully.")
 
+
 def explore_csv_file(file_path):
     try:
         res = {}
@@ -50,9 +50,10 @@ def explore_csv_file(file_path):
         res['bullet_distances'] = df.loc[df[" Event"] == "Enemy hit", " Value"].to_list()
 
         return res
-    
+
     except Exception as e:
         print(f"Error processing {file_path.name}: {str(e)}")
+
 
 def process_csv_file(file_path):
     GLOBAL_DICT[file_path.name] = {}
@@ -169,7 +170,7 @@ def process_csv_file(file_path):
         print(f"Error processing {file_path.name}: {str(e)}")
 
 
-def process_user_folders(main_path, method = "pre-process"):
+def process_user_folders(main_path, method="preprocess"):
     main_dir = Path(main_path)
     if method == "exploration":
         dicts = []
@@ -198,17 +199,17 @@ def process_user_folders(main_path, method = "pre-process"):
             case "exploration":
                 for file_path in csv_files:
                     dicts.append(explore_csv_file(file_path))
-            case "pre-process":
+            case "preprocess":
                 for file_path in csv_files:
                     process_csv_file(file_path)
             case _:
                 raise ValueError("Unknown method")
-        
+
     if method == "exploration":
         return dicts
 
 
-def count_pdfs(folder_path):
+def count_csvs(folder_path):
     main_dir = Path(folder_path)
     user_dirs = [d for d in main_dir.iterdir() if d.is_dir()]
     f = [os.listdir(folder) for folder in user_dirs]
@@ -218,7 +219,6 @@ def count_pdfs(folder_path):
     pdf_files = []
     for files in files_in_folder:
         pdf_files.append(file for file in files if file.endswith('.csv'))
-    print(pdf_files)
     return len(pdf_files)
 
 
@@ -226,11 +226,11 @@ if __name__ == "__main__":
     # Replace with your main directory path
     main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning/data'
 
-    # print(count_pdfs(main_directory))
+    # print(count_csvs(main_directory))
 
     process_user_folders(main_directory)
 
-    with open("features.json", "w") as outfile:
+    with open("processed/features_trial.json", "w") as outfile:
         json.dump(GLOBAL_DICT, outfile)
 
     print("\nProcessing complete!")
