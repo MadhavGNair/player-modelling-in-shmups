@@ -15,10 +15,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
 
-def plot_cumulative_explained_variance(data, n_components=10):
-    # convert JSON data to DataFrame
-    df = pd.DataFrame(data).T  # transpose to get features as columns
-
+def plot_cumulative_explained_variance(df, n_components=10):
     # perform PCA
     pca = PCA(n_components=n_components)
     pca.fit(df)
@@ -293,8 +290,8 @@ def main():
     raw_df.rename(columns={'index': 'filename'}, inplace=True)
 
     # PRE-PCA METRICS:
-    # plot_correlation_matrix(raw_df)
-    # plot_cumulative_explained_variance(raw_df, n_components=10)
+    # plot_correlation_matrix(raw_df[raw_df.columns[1:]])
+    # plot_cumulative_explained_variance(raw_df[raw_df.columns[1:]], n_components=10)
 
     # CONVERT TO PCA:
     # pca_df = perform_pca(sample_data, n_components=2)
