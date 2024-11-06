@@ -46,20 +46,30 @@ def plot_correlation_matrix(data):
     plt.show()
 
 
-def perform_pca(data, n_components=2):
+def perform_pca(data, n_components=2, weights=None):
     filenames = list(data.keys())
     features = list(data[filenames[0]].keys())
 
     # convert features to a Numpy array
-    X = np.array([[data[fname][feat] for feat in features] for fname in filenames])
+    feats = np.array([[data[fname][feat] for feat in features] for fname in filenames])
 
     # standardize the features
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+    feats_scaled = scaler.fit_transform(feats)
+
+    # perform weighting if weights are provided
+    if weights is not None:
+        # normalize the weights
+        weights = weights / np.sum(weights)
+        feats_scaled = feats_scaled * np.sqrt(weights)
 
     # perform PCA
     pca = PCA(n_components=n_components)
-    principal_components = pca.fit_transform(X_scaled)
+    principal_components = pca.fit_transform(feats_scaled)
+
+    # feature importance by component
+    # dataset_pca = pd.DataFrame(abs(pca.components_), columns=features, index=['PC_1', 'PC_2'])
+    # print(dataset_pca)
 
     # create dataframe
     pca_df = pd.DataFrame(principal_components, columns=['principal component 1', 'principal component 2'])
@@ -70,15 +80,15 @@ def perform_pca(data, n_components=2):
 
 def plot_silhouette_scores(df, max_k=10):
     # prepare the data to be clustered
-    X = df[['principal component 1', 'principal component 2']].values
+    feats = df[['principal component 1', 'principal component 2']].values
 
     silhouette_scores = []
 
     # compute silhouette scores for k values in range 2 to max_k
     for k in range(2, max_k + 1):
         kmeans = KMeans(n_clusters=k, random_state=42)
-        labels = kmeans.fit_predict(X)
-        score = silhouette_score(X, labels)
+        labels = kmeans.fit_predict(feats)
+        score = silhouette_score(feats, labels)
         silhouette_scores.append(score)
 
     # plot the silhouette scores
@@ -93,11 +103,11 @@ def plot_silhouette_scores(df, max_k=10):
 
 def perform_kmeans_clustering(df, k):
     # prepare the data to be clustered
-    X = df[['principal component 1', 'principal component 2']].values
+    feats = df[['principal component 1', 'principal component 2']].values
 
-    # perform clustering
+    # perform k-means clustering
     kmeans = KMeans(n_clusters=k, random_state=42)
-    df['cluster'] = kmeans.fit_predict(X)
+    df['cluster'] = kmeans.fit_predict(feats)
     centroids = kmeans.cluster_centers_
 
     return df, centroids
@@ -114,10 +124,9 @@ def plot_kmeans_clustering(df, centroids, shaded=False):
     if shaded:
         for cluster in df['cluster'].unique():
             cluster_points = df[df['cluster'] == cluster][['principal component 1', 'principal component 2']].values
-            if len(cluster_points) >= 3:  # ConvexHull requires at least 3 points
+            if len(cluster_points) >= 3:
                 hull = ConvexHull(cluster_points)
-                hull_points = cluster_points[hull.vertices]
-                plt.fill(hull_points[:, 0], hull_points[:, 1], alpha=0.2, color=sns.color_palette('viridis', as_cmap=True)(cluster / len(df['cluster'].unique())))
+                plt.fill(cluster_points[hull.vertices, 0], cluster_points[hull.vertices, 1], alpha=0.2, color=sns.color_palette('viridis', as_cmap=True)(cluster / len(df['cluster'].unique())))
 
     plt.title('K-Means Clustering with PCA Components')
     plt.legend()
@@ -125,7 +134,7 @@ def plot_kmeans_clustering(df, centroids, shaded=False):
     plt.show()
 
 
-def shapiro_wilks_test(df, output_file='processed/normality_test_results.json'):
+def shapiro_wilks_test(df, output_file='processed/normality_test_results_weighted.json'):
     results = {}
     for col in df.columns[1:]:  # skip the first column (filename)
         stat, p_value = stats.shapiro(df[col])
@@ -137,7 +146,7 @@ def shapiro_wilks_test(df, output_file='processed/normality_test_results.json'):
     print(f'Normality test results saved to {output_file}')
 
 
-def levenes_test(df, output_file='processed/homogeneity_test_results.json'):
+def levenes_test(df, output_file='processed/homogeneity_test_results_weighted.json'):
     stat, p_value = stats.levene(*[df[col] for col in df.columns[1:]])  # skip the first column (filename)
     results = {'levene_statistic': stat, 'p_value': p_value, 'significant': bool(p_value < 0.05)}
 
@@ -158,7 +167,7 @@ def merge_clusters(df_1, df_2):
     return raw_df_with_clusters
 
 
-def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.json', save=False, output_dir="analysis_plots"):
+def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results_weighted.json', save=False, output_dir="analysis_plots"):
     results = {}
     features = df.columns[1:-1]  # Exclude the first column (filename) and the last column (cluster)
     clusters = df['cluster'].unique()
@@ -187,7 +196,7 @@ def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.j
         create_violin_plot(ax2, feature_data[feature], results[feature], feature)
 
         plt.tight_layout()
-        plt.savefig(f"{output_dir}/{feature}_analysis.png", dpi=300, bbox_inches='tight')
+        plt.savefig(f"{output_dir}/{feature}_analysis_1.png", dpi=300, bbox_inches='tight')
         plt.close()
 
     if save:
@@ -261,13 +270,13 @@ def add_significance_indicators(ax, feature_results, max_val):
     significant_pairs = [(0, 1, feature_results['p_value'])]
 
     for c1, c2, p_val in significant_pairs:
-        # Calculate position for significance bar
+        # calculate position for significance bar
         y = max_val + gap + (level * gap * 2)
 
-        # Draw significance bar
+        # draw significance bar
         ax.plot([c1, c1, c2, c2], [y - gap / 2, y, y, y - gap / 2], 'k-', linewidth=1)
 
-        # Add significance asterisks
+        # add significance asterisks
         if p_val < 0.001:
             sig = '***'
         elif p_val < 0.01:
@@ -294,7 +303,8 @@ def main():
     # plot_cumulative_explained_variance(raw_df[raw_df.columns[1:]], n_components=10)
 
     # CONVERT TO PCA:
-    # pca_df = perform_pca(sample_data, n_components=2)
+    weights = [0.8, 0.4, 0.6, 0.5, 0.8, 0.2, 0.8, 0.7, 0.5, 0.5, 0.7]
+    pca_df = perform_pca(sample_data, n_components=2, weights=weights)
 
     # PERFORM OPTIMIZATION:
     # plot_silhouette_scores(pca_df, max_k=10)
@@ -311,6 +321,12 @@ def main():
 
     # STATISTICAL ANALYSIS:
     # merged_df = merge_clusters(raw_df, clustered_df)
+    # feature_columns = merged_df.columns[1:12]
+
+    # # apply the weights to the features
+    # for i, col in enumerate(feature_columns):
+    #     merged_df[col] = merged_df[col] * weights[i]
+
     # kruskal_wallis_test(merged_df)
 
 
