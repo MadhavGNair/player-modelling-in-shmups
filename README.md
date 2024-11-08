@@ -4,6 +4,7 @@ This project focuses on k-means clustering for analyzing data from a Shoot 'em U
 
 ## Folder Structure
 
+- `game/`: the folder containing the game
 - `data/`: the folder containing the raw data collected from users playing the game
 - `processed/`: processed data files used for analysis (exists after running `preprocessing.py`)
 - `results/`: results of the analysis and clustering (path to save generated plots)
@@ -12,7 +13,9 @@ This project focuses on k-means clustering for analyzing data from a Shoot 'em U
 
 - `clustering.py`: contains functions for clustering, statistical tests, and plotting
 - `preprocessing.py`: Functions for preprocessing raw data files
-- `Exploration.ipynb`: Jupyter notebook for exploring the collected data
+- `exploration.ipynb`: Jupyter notebook for exploring the collected data
+- `Identifying Play Styles in Shoot 'Em Up Games.pdf`: Report on the analysis and clustering
+- `gameplay_video.mp4`: the gameplay of the game
 
 ## How to run
 NOTE: For the purpose of debugging and since each part was implemented separately, the functions in `clustering.py` must be called one after the

@@ -1,0 +1,930 @@
+{
+  "player_logs_run_1_10_21_2024_12_12_23_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.38511013877054107,
+    "p_collision_dmg": 0.5308108442264358,
+    "total_enemies_killed": 117,
+    "total_bullets_fired": 431,
+    "p_bullets_hit": 0.4617169373549884,
+    "total_time_alive": 145.325
+  },
+  "player_logs_run_2_10_21_2024_12_14_50_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.75,
+    "p_collision_dmg": 0.25,
+    "total_enemies_killed": 25,
+    "total_bullets_fired": 42,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 14.450999999999999
+  },
+  "player_logs_run_3_10_21_2024_12_15_53.csv": {
+    "p_bullet_dmg": 0.5618000202086209,
+    "p_collision_dmg": 0.33708002111397284,
+    "total_enemies_killed": 20,
+    "total_bullets_fired": 254,
+    "p_bullets_hit": 0.18503937007874016,
+    "total_time_alive": 52.735
+  },
+  "player_logs_run_4_10_21_2024_12_17_00.csv": {
+    "p_bullet_dmg": 0.4791800918011056,
+    "p_collision_dmg": 0.3531114582623623,
+    "total_enemies_killed": 21,
+    "total_bullets_fired": 212,
+    "p_bullets_hit": 0.15566037735849056,
+    "total_time_alive": 55.601
+  },
+  "player_logs_run_10_10_27_2024_21_08_05.csv": {
+    "p_bullet_dmg": 0.3205132663412949,
+    "p_collision_dmg": 0.5489682892465315,
+    "total_enemies_killed": 121,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 140.945
+  },
+  "player_logs_run_1_10_27_2024_20_39_52_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7499999925000002,
+    "p_collision_dmg": 0.25000000749999995,
+    "total_enemies_killed": 10,
+    "total_bullets_fired": 326,
+    "p_bullets_hit": 0.08895705521472393,
+    "total_time_alive": 37.381
+  },
+  "player_logs_run_2_10_27_2024_20_41_36_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5249999942250001,
+    "p_collision_dmg": 0.47500000577499996,
+    "total_enemies_killed": 26,
+    "total_bullets_fired": 246,
+    "p_bullets_hit": 0.2764227642276423,
+    "total_time_alive": 68.465
+  },
+  "player_logs_run_3_10_27_2024_20_43_48.csv": {
+    "p_bullet_dmg": 0.65,
+    "p_collision_dmg": 0.35,
+    "total_enemies_killed": 38,
+    "total_bullets_fired": 206,
+    "p_bullets_hit": 0.5631067961165048,
+    "total_time_alive": 98.13000000000001
+  },
+  "player_logs_run_4_10_27_2024_20_46_46.csv": {
+    "p_bullet_dmg": 0.64,
+    "p_collision_dmg": 0.36,
+    "total_enemies_killed": 88,
+    "total_bullets_fired": 275,
+    "p_bullets_hit": 0.9454545454545454,
+    "total_time_alive": 120.962
+  },
+  "player_logs_run_5_10_27_2024_20_50_21.csv": {
+    "p_bullet_dmg": 0.5454545454545454,
+    "p_collision_dmg": 0.45454545454545453,
+    "total_enemies_killed": 29,
+    "total_bullets_fired": 100,
+    "p_bullets_hit": 0.61,
+    "total_time_alive": 89.73100000000001
+  },
+  "player_logs_run_9_10_27_2024_20_55_46.csv": {
+    "p_bullet_dmg": 0.1677557850335026,
+    "p_collision_dmg": 0.5032673551005078,
+    "total_enemies_killed": 44,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 110.812
+  },
+  "player_logs_run_1_10_29_2024_13_04_05_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.46153846082840233,
+    "p_collision_dmg": 0.5384615391715977,
+    "total_enemies_killed": 11,
+    "total_bullets_fired": 223,
+    "p_bullets_hit": 0.07174887892376682,
+    "total_time_alive": 41.02
+  },
+  "player_logs_run_2_10_29_2024_13_04_50_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7142857142857143,
+    "p_collision_dmg": 0.2857142857142857,
+    "total_enemies_killed": 2,
+    "total_bullets_fired": 114,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 26.223000000000003
+  },
+  "player_logs_run_3_10_29_2024_13_05_20.csv": {
+    "p_bullet_dmg": 0.5853658462343844,
+    "p_collision_dmg": 0.4146341537656156,
+    "total_enemies_killed": 17,
+    "total_bullets_fired": 387,
+    "p_bullets_hit": 0.07751937984496124,
+    "total_time_alive": 65.797
+  },
+  "player_logs_run_4_10_29_2024_13_06_30.csv": {
+    "p_bullet_dmg": 0.7499999981250001,
+    "p_collision_dmg": 0.250000001875,
+    "total_enemies_killed": 11,
+    "total_bullets_fired": 399,
+    "p_bullets_hit": 0.08020050125313283,
+    "total_time_alive": 67.17
+  },
+  "player_logs_run_1_10_28_2024_00_59_59_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7321507228904036,
+    "p_collision_dmg": 0.19524424180832214,
+    "total_enemies_killed": 14,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 54.998000000000005
+  },
+  "player_logs_run_2_10_28_2024_01_01_00_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.8543447602754275,
+    "p_collision_dmg": 0.1423907933792379,
+    "total_enemies_killed": 6,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 75.581
+  },
+  "player_logs_run_3_10_28_2024_01_02_30.csv": {
+    "p_bullet_dmg": 0.40733765008050155,
+    "p_collision_dmg": 0.24440259004830092,
+    "total_enemies_killed": 9,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 48.431
+  },
+  "player_logs_run_4_10_28_2024_01_09_11.csv": {
+    "p_bullet_dmg": 0.5860805895154914,
+    "p_collision_dmg": 0.1831501599012466,
+    "total_enemies_killed": 73,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 111.645
+  },
+  "player_logs_run_1_10_28_2024_11_31_40_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.21590877705624162,
+    "p_collision_dmg": 0.3101904140959348,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 67.413
+  },
+  "player_logs_run_2_10_28_2024_11_32_50_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.2557977066933416,
+    "p_collision_dmg": 0.38263473288812583,
+    "total_enemies_killed": 38,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 83.63000000000001
+  },
+  "player_logs_run_3_10_28_2024_11_34_18.csv": {
+    "p_bullet_dmg": 0.22181508474186554,
+    "p_collision_dmg": 0.36969180790310924,
+    "total_enemies_killed": 27,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 74.23
+  },
+  "player_logs_run_4_10_28_2024_11_35_52.csv": {
+    "p_bullet_dmg": 0.14297077168288816,
+    "p_collision_dmg": 0.34074696914838537,
+    "total_enemies_killed": 20,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 56.55
+  },
+  "player_logs_run_5_10_28_2024_11_36_57.csv": {
+    "p_bullet_dmg": 0.30169709709005893,
+    "p_collision_dmg": 0.4173474587683893,
+    "total_enemies_killed": 11,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 38.465999999999994
+  },
+  "player_logs_run_6_10_28_2024_11_37_38.csv": {
+    "p_bullet_dmg": 0.22263449970776727,
+    "p_collision_dmg": 0.31539887644129116,
+    "total_enemies_killed": 18,
+    "total_bullets_fired": 272,
+    "p_bullets_hit": 0.06985294117647059,
+    "total_time_alive": 60.414
+  },
+  "player_logs_run_7_10_28_2024_11_38_41.csv": {
+    "p_bullet_dmg": 0.212089106344796,
+    "p_collision_dmg": 0.7062565811801129,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 58.43
+  },
+  "player_logs_run_1_10_28_2024_14_02_02_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5357142761479593,
+    "p_collision_dmg": 0.46428572385204064,
+    "total_enemies_killed": 27,
+    "total_bullets_fired": 252,
+    "p_bullets_hit": 0.2896825396825397,
+    "total_time_alive": 61.596000000000004
+  },
+  "player_logs_run_2_10_28_2024_14_03_06_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4756871273281526,
+    "p_collision_dmg": 0.5243128726718473,
+    "total_enemies_killed": 118,
+    "total_bullets_fired": 429,
+    "p_bullets_hit": 0.3543123543123543,
+    "total_time_alive": 128.345
+  },
+  "player_logs_run_3_10_28_2024_14_05_16.csv": {
+    "p_bullet_dmg": 0.6789663647502012,
+    "p_collision_dmg": 0.28905298161112297,
+    "total_enemies_killed": 68,
+    "total_bullets_fired": 267,
+    "p_bullets_hit": 0.3146067415730337,
+    "total_time_alive": 116.28
+  },
+  "player_logs_run_4_10_28_2024_14_08_20.csv": {
+    "p_bullet_dmg": 0.36633276077476595,
+    "p_collision_dmg": 0.5721781283294348,
+    "total_enemies_killed": 145,
+    "total_bullets_fired": 399,
+    "p_bullets_hit": 0.3558897243107769,
+    "total_time_alive": 141.376
+  },
+  "player_logs_run_1_10_21_2024_12_28_05_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.8275862006183116,
+    "p_collision_dmg": 0.1724137993816884,
+    "total_enemies_killed": 9,
+    "total_bullets_fired": 150,
+    "p_bullets_hit": 0.21333333333333335,
+    "total_time_alive": 57.461999999999996
+  },
+  "player_logs_run_2_10_21_2024_12_29_11_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.6315789457063712,
+    "p_collision_dmg": 0.3684210542936288,
+    "total_enemies_killed": 12,
+    "total_bullets_fired": 312,
+    "p_bullets_hit": 0.08333333333333333,
+    "total_time_alive": 98.327
+  },
+  "player_logs_run_3_10_21_2024_12_31_00.csv": {
+    "p_bullet_dmg": 0.8059701468478503,
+    "p_collision_dmg": 0.19402985315214968,
+    "total_enemies_killed": 40,
+    "total_bullets_fired": 361,
+    "p_bullets_hit": 0.2853185595567867,
+    "total_time_alive": 117.194
+  },
+  "player_logs_run_4_10_21_2024_12_33_14.csv": {
+    "p_bullet_dmg": 0.75,
+    "p_collision_dmg": 0.25,
+    "total_enemies_killed": 16,
+    "total_bullets_fired": 186,
+    "p_bullets_hit": 0.3655913978494624,
+    "total_time_alive": 87.593
+  },
+  "player_logs_run_1_10_28_2024_14_16_29_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7894736833795013,
+    "p_collision_dmg": 0.21052631662049862,
+    "total_enemies_killed": 4,
+    "total_bullets_fired": 32,
+    "p_bullets_hit": 0.1875,
+    "total_time_alive": 97.41199999999999
+  },
+  "player_logs_run_2_10_28_2024_14_18_55_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.15404478179471143,
+    "p_collision_dmg": 0.48780848081807887,
+    "total_enemies_killed": 20,
+    "total_bullets_fired": 90,
+    "p_bullets_hit": 0.14444444444444443,
+    "total_time_alive": 55.843999999999994
+  },
+  "player_logs_run_3_10_28_2024_14_20_14.csv": {
+    "p_bullet_dmg": 0.29032257821019775,
+    "p_collision_dmg": 0.7096774217898023,
+    "total_enemies_killed": 35,
+    "total_bullets_fired": 255,
+    "p_bullets_hit": 0.2627450980392157,
+    "total_time_alive": 78.304
+  },
+  "player_logs_run_4_10_28_2024_14_22_17.csv": {
+    "p_bullet_dmg": 0.18113417274567856,
+    "p_collision_dmg": 0.49057327138030105,
+    "total_enemies_killed": 47,
+    "total_bullets_fired": 350,
+    "p_bullets_hit": 0.18571428571428572,
+    "total_time_alive": 88.08300000000001
+  },
+  "player_logs_run_5_10_28_2024_14_23_49.csv": {
+    "p_bullet_dmg": 0.24783150118004293,
+    "p_collision_dmg": 0.5766212217005363,
+    "total_enemies_killed": 44,
+    "total_bullets_fired": 315,
+    "p_bullets_hit": 0.2,
+    "total_time_alive": 81.15599999999999
+  },
+  "player_logs_run_1_10_28_2024_19_30_30_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4897959151686797,
+    "p_collision_dmg": 0.5102040848313203,
+    "total_enemies_killed": 22,
+    "total_bullets_fired": 335,
+    "p_bullets_hit": 0.1373134328358209,
+    "total_time_alive": 62.247
+  },
+  "player_logs_run_2_10_28_2024_19_31_36_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4090909031404959,
+    "p_collision_dmg": 0.5909090968595041,
+    "total_enemies_killed": 32,
+    "total_bullets_fired": 384,
+    "p_bullets_hit": 0.1953125,
+    "total_time_alive": 78.197
+  },
+  "player_logs_run_3_10_28_2024_19_32_57.csv": {
+    "p_bullet_dmg": 0.5714285689795918,
+    "p_collision_dmg": 0.4285714310204081,
+    "total_enemies_killed": 42,
+    "total_bullets_fired": 465,
+    "p_bullets_hit": 0.23870967741935484,
+    "total_time_alive": 77.965
+  },
+  "player_logs_run_4_10_28_2024_19_34_45.csv": {
+    "p_bullet_dmg": 0.5789473659833795,
+    "p_collision_dmg": 0.42105263401662046,
+    "total_enemies_killed": 33,
+    "total_bullets_fired": 369,
+    "p_bullets_hit": 0.24661246612466126,
+    "total_time_alive": 79.013
+  },
+  "player_logs_run_1_10_28_2024_21_01_18_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.3610500621407857,
+    "p_collision_dmg": 0.6389499378592143,
+    "total_enemies_killed": 27,
+    "total_bullets_fired": 185,
+    "p_bullets_hit": 0.11351351351351352,
+    "total_time_alive": 76.279
+  },
+  "player_logs_run_2_10_28_2024_21_02_37_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.8181818181818182,
+    "p_collision_dmg": 0.18181818181818182,
+    "total_enemies_killed": 2,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 48.448
+  },
+  "player_logs_run_3_10_28_2024_21_03_29.csv": {
+    "p_bullet_dmg": 0.6896551724137931,
+    "p_collision_dmg": 0.3103448275862069,
+    "total_enemies_killed": 9,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 72.598
+  },
+  "player_logs_run_4_10_28_2024_21_04_45.csv": {
+    "p_bullet_dmg": 0.11964108702804932,
+    "p_collision_dmg": 0.8803589129719507,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 0,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 56.44
+  },
+  "player_logs_run_1_10_20_2024_13_56_02_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.2555367173773933,
+    "p_collision_dmg": 0.6431009343038743,
+    "total_enemies_killed": 21,
+    "total_bullets_fired": 157,
+    "p_bullets_hit": 0.1592356687898089,
+    "total_time_alive": 64.36200000000001
+  },
+  "player_logs_run_2_10_20_2024_13_57_12_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.20792176453730854,
+    "p_collision_dmg": 0.6316866473930757,
+    "total_enemies_killed": 49,
+    "total_bullets_fired": 228,
+    "p_bullets_hit": 0.19298245614035087,
+    "total_time_alive": 85.74600000000001
+  },
+  "player_logs_run_3_10_20_2024_13_58_42.csv": {
+    "p_bullet_dmg": 0.09623233380048023,
+    "p_collision_dmg": 0.5453165614104658,
+    "total_enemies_killed": 17,
+    "total_bullets_fired": 102,
+    "p_bullets_hit": 0.19607843137254902,
+    "total_time_alive": 51.263
+  },
+  "player_logs_run_4_10_20_2024_14_01_34.csv": {
+    "p_bullet_dmg": 0.2841368545046065,
+    "p_collision_dmg": 0.589585150370759,
+    "total_enemies_killed": 40,
+    "total_bullets_fired": 203,
+    "p_bullets_hit": 0.17733990147783252,
+    "total_time_alive": 75.31099999999999
+  },
+  "player_logs_run_1_10_30_2024_15_03_38_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.35999999539200006,
+    "p_collision_dmg": 0.6400000046079999,
+    "total_enemies_killed": 32,
+    "total_bullets_fired": 423,
+    "p_bullets_hit": 0.15839243498817968,
+    "total_time_alive": 75.97999999999999
+  },
+  "player_logs_run_2_10_30_2024_15_04_56_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4444444404938272,
+    "p_collision_dmg": 0.5555555595061727,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 358,
+    "p_bullets_hit": 0.1564245810055866,
+    "total_time_alive": 58.663000000000004
+  },
+  "player_logs_run_3_10_30_2024_15_05_58.csv": {
+    "p_bullet_dmg": 0.6538461528402367,
+    "p_collision_dmg": 0.34615384715976333,
+    "total_enemies_killed": 70,
+    "total_bullets_fired": 433,
+    "p_bullets_hit": 0.5057736720554272,
+    "total_time_alive": 138.84300000000002
+  },
+  "player_logs_run_4_10_30_2024_15_08_32.csv": {
+    "p_bullet_dmg": 0.38461538224852077,
+    "p_collision_dmg": 0.6153846177514792,
+    "total_enemies_killed": 94,
+    "total_bullets_fired": 529,
+    "p_bullets_hit": 0.5141776937618148,
+    "total_time_alive": 127.061
+  },
+  "player_logs_run_5_10_30_2024_15_10_46.csv": {
+    "p_bullet_dmg": 0.5909090890289257,
+    "p_collision_dmg": 0.4090909109710744,
+    "total_enemies_killed": 146,
+    "total_bullets_fired": 466,
+    "p_bullets_hit": 0.8841201716738197,
+    "total_time_alive": 146.928
+  },
+  "player_logs_run_6_10_30_2024_15_14_00.csv": {
+    "p_bullet_dmg": 0.39473684013157906,
+    "p_collision_dmg": 0.6052631598684209,
+    "total_enemies_killed": 74,
+    "total_bullets_fired": 396,
+    "p_bullets_hit": 0.4595959595959596,
+    "total_time_alive": 110.113
+  },
+  "player_logs_run_7_10_30_2024_15_16_06.csv": {
+    "p_bullet_dmg": 0.7605633792104741,
+    "p_collision_dmg": 0.2394366207895259,
+    "total_enemies_killed": 56,
+    "total_bullets_fired": 268,
+    "p_bullets_hit": 0.6529850746268657,
+    "total_time_alive": 111.229
+  },
+  "player_logs_run_1_10_30_2024_17_01_40_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7970468775549089,
+    "p_collision_dmg": 0.20295312244509112,
+    "total_enemies_killed": 55,
+    "total_bullets_fired": 428,
+    "p_bullets_hit": 0.3598130841121495,
+    "total_time_alive": 110.796
+  },
+  "player_logs_run_2_10_30_2024_17_03_39_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.6140660748088836,
+    "p_collision_dmg": 0.0861847133311873,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 21,
+    "p_bullets_hit": 0.047619047619047616,
+    "total_time_alive": 82.81400000000001
+  },
+  "player_logs_run_3_10_30_2024_17_05_14.csv": {
+    "p_bullet_dmg": 0.8571428571428571,
+    "p_collision_dmg": 0.14285714285714285,
+    "total_enemies_killed": 27,
+    "total_bullets_fired": 128,
+    "p_bullets_hit": 0.59375,
+    "total_time_alive": 66.664
+  },
+  "player_logs_run_4_10_30_2024_17_06_24.csv": {
+    "p_bullet_dmg": 0.625,
+    "p_collision_dmg": 0.375,
+    "total_enemies_killed": 24,
+    "total_bullets_fired": 290,
+    "p_bullets_hit": 0.23103448275862068,
+    "total_time_alive": 61.897000000000006
+  },
+  "player_logs_run_1_10_30_2024_18_04_50_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.42452830156639376,
+    "p_collision_dmg": 0.5754716984336063,
+    "total_enemies_killed": 72,
+    "total_bullets_fired": 330,
+    "p_bullets_hit": 0.5303030303030303,
+    "total_time_alive": 122.748
+  },
+  "player_logs_run_2_10_30_2024_18_06_55_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5806451564203955,
+    "p_collision_dmg": 0.41935484357960456,
+    "total_enemies_killed": 99,
+    "total_bullets_fired": 618,
+    "p_bullets_hit": 0.4320388349514563,
+    "total_time_alive": 121.11500000000001
+  },
+  "player_logs_run_3_10_30_2024_18_08_59.csv": {
+    "p_bullet_dmg": 0.5399999973,
+    "p_collision_dmg": 0.46000000269999997,
+    "total_enemies_killed": 71,
+    "total_bullets_fired": 466,
+    "p_bullets_hit": 0.37124463519313305,
+    "total_time_alive": 120.202
+  },
+  "player_logs_run_4_10_30_2024_18_11_01.csv": {
+    "p_bullet_dmg": 0.25531914513354464,
+    "p_collision_dmg": 0.7446808548664553,
+    "total_enemies_killed": 35,
+    "total_bullets_fired": 332,
+    "p_bullets_hit": 0.22590361445783133,
+    "total_time_alive": 73.181
+  },
+  "player_logs_run_1_10_30_2024_19_10_58_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.39130434612476367,
+    "p_collision_dmg": 0.6086956538752363,
+    "total_enemies_killed": 6,
+    "total_bullets_fired": 67,
+    "p_bullets_hit": 0.13432835820895522,
+    "total_time_alive": 57.339
+  },
+  "player_logs_run_2_10_30_2024_19_11_58_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.6669126483566415,
+    "p_collision_dmg": 0.33308735164335845,
+    "total_enemies_killed": 77,
+    "total_bullets_fired": 427,
+    "p_bullets_hit": 0.45901639344262296,
+    "total_time_alive": 123.688
+  },
+  "player_logs_run_3_10_30_2024_19_14_05.csv": {
+    "p_bullet_dmg": 0.5495420669253563,
+    "p_collision_dmg": 0.38925892527112693,
+    "total_enemies_killed": 71,
+    "total_bullets_fired": 415,
+    "p_bullets_hit": 0.42891566265060244,
+    "total_time_alive": 114.862
+  },
+  "player_logs_run_4_10_30_2024_19_16_02.csv": {
+    "p_bullet_dmg": 0.576923074704142,
+    "p_collision_dmg": 0.42307692529585794,
+    "total_enemies_killed": 27,
+    "total_bullets_fired": 414,
+    "p_bullets_hit": 0.15217391304347827,
+    "total_time_alive": 69.214
+  },
+  "player_logs_run_1_10_21_2024_12_40_50_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.33333333111111113,
+    "p_collision_dmg": 0.6666666688888888,
+    "total_enemies_killed": 24,
+    "total_bullets_fired": 333,
+    "p_bullets_hit": 0.15615615615615616,
+    "total_time_alive": 67.826
+  },
+  "player_logs_run_2_10_21_2024_12_42_10_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.2928257828330364,
+    "p_collision_dmg": 0.6090775720701654,
+    "total_enemies_killed": 78,
+    "total_bullets_fired": 228,
+    "p_bullets_hit": 0.36403508771929827,
+    "total_time_alive": 110.659
+  },
+  "player_logs_run_3_10_21_2024_12_45_15.csv": {
+    "p_bullet_dmg": 0.30056364888928483,
+    "p_collision_dmg": 0.6994363511107151,
+    "total_enemies_killed": 29,
+    "total_bullets_fired": 124,
+    "p_bullets_hit": 0.23387096774193547,
+    "total_time_alive": 73.53099999999999
+  },
+  "player_logs_run_4_10_21_2024_12_46_41.csv": {
+    "p_bullet_dmg": 0.5172419622209574,
+    "p_collision_dmg": 0.4545459683676352,
+    "total_enemies_killed": 40,
+    "total_bullets_fired": 190,
+    "p_bullets_hit": 0.3,
+    "total_time_alive": 104.53699999999999
+  },
+  "player_logs_run_1_10_30_2024_23_37_36_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.30105409400593397,
+    "p_collision_dmg": 0.6176645519966791,
+    "total_enemies_killed": 39,
+    "total_bullets_fired": 332,
+    "p_bullets_hit": 0.22590361445783133,
+    "total_time_alive": 75.297
+  },
+  "player_logs_run_2_10_30_2024_23_38_56_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.20993835068798908,
+    "p_collision_dmg": 0.615819788194222,
+    "total_enemies_killed": 60,
+    "total_bullets_fired": 456,
+    "p_bullets_hit": 0.22587719298245615,
+    "total_time_alive": 97.047
+  },
+  "player_logs_run_3_10_30_2024_23_40_42.csv": {
+    "p_bullet_dmg": 0.24764284365358677,
+    "p_collision_dmg": 0.4805490809653455,
+    "total_enemies_killed": 72,
+    "total_bullets_fired": 474,
+    "p_bullets_hit": 0.2320675105485232,
+    "total_time_alive": 102.946
+  },
+  "player_logs_run_4_10_30_2024_23_42_30.csv": {
+    "p_bullet_dmg": 0.2700278542383338,
+    "p_collision_dmg": 0.5769602754409923,
+    "total_enemies_killed": 50,
+    "total_bullets_fired": 444,
+    "p_bullets_hit": 0.1981981981981982,
+    "total_time_alive": 89.66199999999999
+  },
+  "player_logs_run_1_10_30_2024_23_45_21_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5940593913537893,
+    "p_collision_dmg": 0.19801980503872163,
+    "total_enemies_killed": 7,
+    "total_bullets_fired": 496,
+    "p_bullets_hit": 0.04032258064516129,
+    "total_time_alive": 56.974
+  },
+  "player_logs_run_2_10_30_2024_23_46_34_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4156358386734444,
+    "p_collision_dmg": 0.5056902284265966,
+    "total_enemies_killed": 23,
+    "total_bullets_fired": 196,
+    "p_bullets_hit": 0.17346938775510204,
+    "total_time_alive": 58.408
+  },
+  "player_logs_run_3_10_30_2024_23_47_39.csv": {
+    "p_bullet_dmg": 0.2128917689328943,
+    "p_collision_dmg": 0.7806031726238444,
+    "total_enemies_killed": 31,
+    "total_bullets_fired": 251,
+    "p_bullets_hit": 0.2589641434262948,
+    "total_time_alive": 86.862
+  },
+  "player_logs_run_4_10_30_2024_23_49_14.csv": {
+    "p_bullet_dmg": 0.5369677982625846,
+    "p_collision_dmg": 0.16705664954162142,
+    "total_enemies_killed": 61,
+    "total_bullets_fired": 211,
+    "p_bullets_hit": 0.32701421800947866,
+    "total_time_alive": 108.99199999999999
+  },
+  "player_logs_run_1_11_01_2024_10_44_33_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5238095238095238,
+    "p_collision_dmg": 0.47619047619047616,
+    "total_enemies_killed": 10,
+    "total_bullets_fired": 5,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 92.988
+  },
+  "player_logs_run_2_11_01_2024_10_46_13_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.2664222927439923,
+    "p_collision_dmg": 0.683817227989346,
+    "total_enemies_killed": 50,
+    "total_bullets_fired": 218,
+    "p_bullets_hit": 0.23853211009174313,
+    "total_time_alive": 88.86
+  },
+  "player_logs_run_3_11_01_2024_10_47_48.csv": {
+    "p_bullet_dmg": 0.35744680327822553,
+    "p_collision_dmg": 0.6297872384405613,
+    "total_enemies_killed": 38,
+    "total_bullets_fired": 392,
+    "p_bullets_hit": 0.18622448979591838,
+    "total_time_alive": 77.423
+  },
+  "player_logs_run_4_11_01_2024_10_49_10.csv": {
+    "p_bullet_dmg": 0.28368793947990545,
+    "p_collision_dmg": 0.6382978709219859,
+    "total_enemies_killed": 41,
+    "total_bullets_fired": 491,
+    "p_bullets_hit": 0.1710794297352342,
+    "total_time_alive": 79.641
+  },
+  "player_logs_run_1_11_01_2024_19_08_51_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.0,
+    "p_collision_dmg": 0.20101144941114635,
+    "total_enemies_killed": 1,
+    "total_bullets_fired": 20,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 12.115
+  },
+  "player_logs_run_2_11_01_2024_19_09_15_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.7499999925000002,
+    "p_collision_dmg": 0.25000000749999995,
+    "total_enemies_killed": 2,
+    "total_bullets_fired": 421,
+    "p_bullets_hit": 0.011876484560570071,
+    "total_time_alive": 42.631
+  },
+  "player_logs_run_3_11_01_2024_19_10_01.csv": {
+    "p_bullet_dmg": 0.0,
+    "p_collision_dmg": 0.2580721750451944,
+    "total_enemies_killed": 1,
+    "total_bullets_fired": 21,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 11.7
+  },
+  "player_logs_run_4_11_01_2024_19_10_16.csv": {
+    "p_bullet_dmg": 0.24390981580906296,
+    "p_collision_dmg": 0.0,
+    "total_enemies_killed": 0,
+    "total_bullets_fired": 47,
+    "p_bullets_hit": 0.0,
+    "total_time_alive": 12.85
+  },
+  "player_logs_run_5_11_01_2024_19_10_32.csv": {
+    "p_bullet_dmg": 0.7741935433922996,
+    "p_collision_dmg": 0.22580645660770024,
+    "total_enemies_killed": 9,
+    "total_bullets_fired": 260,
+    "p_bullets_hit": 0.1,
+    "total_time_alive": 58.531000000000006
+  },
+  "player_logs_run_6_11_01_2024_19_11_34.csv": {
+    "p_bullet_dmg": 0.35311453826086187,
+    "p_collision_dmg": 0.6277591893315078,
+    "total_enemies_killed": 18,
+    "total_bullets_fired": 218,
+    "p_bullets_hit": 0.0963302752293578,
+    "total_time_alive": 58.114000000000004
+  },
+  "player_logs_run_1_10_21_2024_12_13_36_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.4442616137000464,
+    "p_collision_dmg": 0.41135335029663633,
+    "total_enemies_killed": 51,
+    "total_bullets_fired": 509,
+    "p_bullets_hit": 0.2043222003929273,
+    "total_time_alive": 91.38
+  },
+  "player_logs_run_2_10_21_2024_12_15_08_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.49999999600000006,
+    "p_collision_dmg": 0.500000004,
+    "total_enemies_killed": 12,
+    "total_bullets_fired": 80,
+    "p_bullets_hit": 0.275,
+    "total_time_alive": 26.964
+  },
+  "player_logs_run_3_10_21_2024_12_15_35.csv": {
+    "p_bullet_dmg": 0.75,
+    "p_collision_dmg": 0.25,
+    "total_enemies_killed": 4,
+    "total_bullets_fired": 85,
+    "p_bullets_hit": 0.16470588235294117,
+    "total_time_alive": 14.748999999999999
+  },
+  "player_logs_run_4_10_21_2024_12_15_59.csv": {
+    "p_bullet_dmg": 0.5806451564203955,
+    "p_collision_dmg": 0.41935484357960456,
+    "total_enemies_killed": 32,
+    "total_bullets_fired": 382,
+    "p_bullets_hit": 0.19895287958115182,
+    "total_time_alive": 61.080000000000005
+  },
+  "player_logs_run_1_10_27_2024_15_39_24_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.27088483694955395,
+    "p_collision_dmg": 0.3160323106774291,
+    "total_enemies_killed": 5,
+    "total_bullets_fired": 108,
+    "p_bullets_hit": 0.06481481481481481,
+    "total_time_alive": 24.966
+  },
+  "player_logs_run_2_10_27_2024_15_40_25_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.21052631357340723,
+    "p_collision_dmg": 0.7894736864265928,
+    "total_enemies_killed": 24,
+    "total_bullets_fired": 161,
+    "p_bullets_hit": 0.16770186335403728,
+    "total_time_alive": 62.213
+  },
+  "player_logs_run_3_10_27_2024_15_41_36.csv": {
+    "p_bullet_dmg": 0.2812499991210937,
+    "p_collision_dmg": 0.7187500008789063,
+    "total_enemies_killed": 9,
+    "total_bullets_fired": 51,
+    "p_bullets_hit": 0.09803921568627451,
+    "total_time_alive": 34.549
+  },
+  "player_logs_run_4_10_27_2024_15_42_13.csv": {
+    "p_bullet_dmg": 0.2926829235455087,
+    "p_collision_dmg": 0.7073170764544914,
+    "total_enemies_killed": 19,
+    "total_bullets_fired": 133,
+    "p_bullets_hit": 0.2706766917293233,
+    "total_time_alive": 56.964999999999996
+  },
+  "player_logs_run_1_10_27_2024_21_24_23_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.9,
+    "p_collision_dmg": 0.1,
+    "total_enemies_killed": 41,
+    "total_bullets_fired": 314,
+    "p_bullets_hit": 0.42356687898089174,
+    "total_time_alive": 97.013
+  },
+  "player_logs_run_2_10_27_2024_21_27_13_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.8823529411764706,
+    "p_collision_dmg": 0.11764705882352941,
+    "total_enemies_killed": 57,
+    "total_bullets_fired": 275,
+    "p_bullets_hit": 0.6,
+    "total_time_alive": 98.128
+  },
+  "player_logs_run_3_10_27_2024_21_28_59.csv": {
+    "p_bullet_dmg": 0.8888888888888888,
+    "p_collision_dmg": 0.1111111111111111,
+    "total_enemies_killed": 31,
+    "total_bullets_fired": 186,
+    "p_bullets_hit": 0.5698924731182796,
+    "total_time_alive": 99.296
+  },
+  "player_logs_run_4_10_27_2024_21_31_02.csv": {
+    "p_bullet_dmg": 0.48648648464572686,
+    "p_collision_dmg": 0.5135135153542733,
+    "total_enemies_killed": 13,
+    "total_bullets_fired": 257,
+    "p_bullets_hit": 0.10505836575875487,
+    "total_time_alive": 62.431
+  },
+  "player_logs_run_1_10_27_2024_21_37_26_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.49120095133285296,
+    "p_collision_dmg": 0.395827348909343,
+    "total_enemies_killed": 67,
+    "total_bullets_fired": 637,
+    "p_bullets_hit": 0.22762951334379905,
+    "total_time_alive": 98.896
+  },
+  "player_logs_run_2_10_27_2024_21_39_18_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.6462471123755423,
+    "p_collision_dmg": 0.33658763533953917,
+    "total_enemies_killed": 68,
+    "total_bullets_fired": 513,
+    "p_bullets_hit": 0.31773879142300193,
+    "total_time_alive": 104.595
+  },
+  "player_logs_run_3_10_27_2024_21_41_13.csv": {
+    "p_bullet_dmg": 0.5745066846825835,
+    "p_collision_dmg": 0.385099929850723,
+    "total_enemies_killed": 129,
+    "total_bullets_fired": 532,
+    "p_bullets_hit": 0.5657894736842105,
+    "total_time_alive": 133.645
+  },
+  "player_logs_run_4_10_27_2024_21_44_17.csv": {
+    "p_bullet_dmg": 0.33869901280353826,
+    "p_collision_dmg": 0.4403087213863859,
+    "total_enemies_killed": 159,
+    "total_bullets_fired": 596,
+    "p_bullets_hit": 0.4463087248322148,
+    "total_time_alive": 142.878
+  },
+  "player_logs_run_1_10_27_2024_22_27_35_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.5691740081338951,
+    "p_collision_dmg": 0.2529662289993645,
+    "total_enemies_killed": 43,
+    "total_bullets_fired": 778,
+    "p_bullets_hit": 0.14267352185089974,
+    "total_time_alive": 91.35900000000001
+  },
+  "player_logs_run_2_10_27_2024_22_29_08_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.2142857109183674,
+    "p_collision_dmg": 0.7857142890816327,
+    "total_enemies_killed": 12,
+    "total_bullets_fired": 365,
+    "p_bullets_hit": 0.07397260273972603,
+    "total_time_alive": 42.28
+  },
+  "player_logs_run_3_10_27_2024_22_29_54.csv": {
+    "p_bullet_dmg": 0.6976744153596538,
+    "p_collision_dmg": 0.3023255846403461,
+    "total_enemies_killed": 30,
+    "total_bullets_fired": 302,
+    "p_bullets_hit": 0.25496688741721857,
+    "total_time_alive": 67.034
+  },
+  "player_logs_run_4_10_27_2024_22_31_05.csv": {
+    "p_bullet_dmg": 0.6349206295157844,
+    "p_collision_dmg": 0.25867136758050474,
+    "total_enemies_killed": 183,
+    "total_bullets_fired": 484,
+    "p_bullets_hit": 0.8574380165289256,
+    "total_time_alive": 151.635
+  },
+  "player_logs_run_1_10_27_2024_21_59_56_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.6652205318748631,
+    "p_collision_dmg": 0.28922631936336746,
+    "total_enemies_killed": 80,
+    "total_bullets_fired": 300,
+    "p_bullets_hit": 0.6566666666666666,
+    "total_time_alive": 120.283
+  },
+  "player_logs_run_2_10_27_2024_22_02_00_[PRACTICE].csv": {
+    "p_bullet_dmg": 0.75,
+    "p_collision_dmg": 0.25,
+    "total_enemies_killed": 40,
+    "total_bullets_fired": 88,
+    "p_bullets_hit": 1.2840909090909092,
+    "total_time_alive": 94.112
+  },
+  "player_logs_run_3_10_27_2024_22_03_37.csv": {
+    "p_bullet_dmg": 0.7222222222222222,
+    "p_collision_dmg": 0.2777777777777778,
+    "total_enemies_killed": 102,
+    "total_bullets_fired": 353,
+    "p_bullets_hit": 0.8073654390934845,
+    "total_time_alive": 152.85000000000002
+  },
+  "player_logs_run_4_10_27_2024_22_06_28.csv": {
+    "p_bullet_dmg": 0.7004504964943143,
+    "p_collision_dmg": 0.2971608169068153,
+    "total_enemies_killed": 53,
+    "total_bullets_fired": 446,
+    "p_bullets_hit": 0.33183856502242154,
+    "total_time_alive": 123.544
+  }
+}

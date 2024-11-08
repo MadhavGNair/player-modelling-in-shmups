@@ -222,7 +222,7 @@ def merge_clusters(df_1, df_2):
     return raw_df_with_clusters
 
 
-def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.json', save=True, output_dir="analysis_plots"):
+def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.json', save=True, output_dir="results/analysis_plots"):
     """
     Perform the Kruskal-Wallis test on the data
     :param df: the dataframe of features with cluster labels
