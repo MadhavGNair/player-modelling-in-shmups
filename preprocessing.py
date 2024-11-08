@@ -15,7 +15,7 @@ def explore_csv_file(file_path):
     """
     try:
         res = {}
-        # read the csv
+        # Read the CSV
         df = pd.read_csv(file_path)
         value_counts = df[' Event'].value_counts()
 
@@ -45,7 +45,7 @@ def process_csv_file(file_path):
     """
     GLOBAL_DICT[file_path.name] = {}
     try:
-        # read the csv
+        # Read the CSV
         df = pd.read_csv(file_path)
 
         # FEATURE EXTRACTION
@@ -79,17 +79,17 @@ def process_csv_file(file_path):
                     collision_dmg += damage
 
             # PERCENTAGE HEALING TIME (OVER TOTAL PLAY TIME)
-            # locate the windows between two 'Damage taken' or 'Bullet Fired' events
+            # Locate the windows between two 'Damage taken' or 'Bullet Fired' events
             if df.loc[i, ' Event'] in ['Damage taken', 'Bullet Fired']:
                 if last_healing_event_time is not None:
-                    # calculate the healing interval time
+                    # Calculate the healing interval time
                     healing_time = df.loc[i, 'Timestamp'] - last_healing_event_time
-                    # calculate the percentage of healing time with respect to the total time
+                    # Calculate the percentage of healing time with respect to the total time
                     healing_percentage = (healing_time / total_time)
-                    # append the percentage to the list
+                    # Append the percentage to the list
                     healing_percentages.append(healing_percentage)
 
-                # update the last healing event time
+                # Update the last healing event time
                 last_healing_event_time = df.loc[i, 'Timestamp']
 
             # TOTAL BULLETS FIRED (OF TOTAL EVENTS)
@@ -109,22 +109,22 @@ def process_csv_file(file_path):
             if df.loc[i, ' Event'] == 'Enemy killed':
                 total_enemies_killed += 1
 
-        # calculate percentage damage taken
+        # Calculate percentage damage taken
         total_dmg = water_dmg + collision_dmg + bullet_dmg
         p_bullet_dmg = bullet_dmg / total_dmg if total_dmg > 0 else 0
         p_water_dmg = water_dmg / total_dmg if total_dmg > 0 else 0
         p_collision_dmg = collision_dmg / total_dmg if total_dmg > 0 else 0
 
-        # calculate the average healing percentage
+        # Calculate the average healing percentage
         average_healing_percentage = sum(healing_percentages) / len(healing_percentages) if healing_percentages else 0
 
-        # calculate percentage bullets missed
+        # Calculate percentage bullets missed
         p_bullets_missed = total_bullets_missed / total_bullets_fired if total_bullets_fired > 0 else 0
 
-        # calculate percentage bullets hit
+        # Calculate percentage bullets hit
         p_bullets_hit = total_hit_count / total_bullets_fired if total_bullets_fired > 0 else 0
 
-        # calculate average distance bullets travelled
+        # Calculate average distance bullets travelled
         average_bullet_distance = total_bullet_distance / total_hit_count if total_hit_count > 0 else 0
 
         # PERCENTAGE MOVEMENT DISTRIBUTION (OVER ALL MOVEMENT EVENTS)
@@ -136,13 +136,13 @@ def process_csv_file(file_path):
 
         movement_count = accelerate_count + right_count + left_count
 
-        # calculate percentage accelerated (of total movement)
+        # Calculate percentage accelerated (of total movement)
         p_accelerated = accelerate_count / movement_count if movement_count > 0 else 0
 
-        # calculate percentage turned left (of total movement)
+        # Calculate percentage turned left (of total movement)
         p_right = right_count / movement_count if movement_count > 0 else 0
 
-        # calculate percentage turned right (of total movement)
+        # Calculate percentage turned right (of total movement)
         p_left = left_count / movement_count if movement_count > 0 else 0
 
         GLOBAL_DICT[file_path.name] = {'p_bullet_dmg': float(p_bullet_dmg),
@@ -169,14 +169,14 @@ def process_user_folders(main_path, method="preprocess"):
     if method == "exploration":
         dicts = []
 
-    # get all directories
+    # Get all directories
     user_dirs = [d for d in main_dir.iterdir()
                  if d.is_dir()]
 
     for user_dir in user_dirs:
         print(f"\nProcessing directory: {user_dir.name}")
 
-        # get all CSV files in the user directory
+        # Get all CSV files in the user directory
         csv_files = [f for f in user_dir.glob("*.csv")
                      if f.is_file() and not any(parent.name == "extra"
                                                 for parent in f.parents)]
@@ -188,7 +188,7 @@ def process_user_folders(main_path, method="preprocess"):
         for i in csv_files:
             print(i)
 
-        # process each relevant CSV file
+        # Process each relevant CSV file
         match method:
             case "exploration":
                 for file_path in csv_files:
@@ -222,18 +222,18 @@ def count_csvs(folder_path):
 
 
 if __name__ == "__main__":
-    # path to raw data
+    # Path to raw data
     main_directory = './data'
 
-    # number of runs
+    # Number of runs
     # print(count_csvs(main_directory))
 
     process_user_folders(main_directory)
 
-    # output directory
+    # Output directory
     output_dir = "processed"
 
-    # create the output directory if it does not exist
+    # Create the output directory if it does not exist
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     with open(f"{output_dir}/features.json", "w") as outfile:

@@ -23,14 +23,14 @@ def plot_cumulative_explained_variance(df, n_components=10):
     :param n_components: number of PCA components
     :return: the cumulative explained variance ratio list
     """
-    # perform PCA
+    # Perform PCA
     pca = PCA(n_components=n_components)
     pca.fit(df)
 
-    # calculate cumulative explained variance ratio
+    # Calculate cumulative explained variance ratio
     cumulative_explained_variance = pca.explained_variance_ratio_.cumsum()
 
-    # plot cumulative explained variance ratio
+    # Plot cumulative explained variance ratio
     plt.figure(figsize=(8, 6))
     plt.plot(range(1, n_components + 1), cumulative_explained_variance, marker='o', linestyle='--')
     plt.xlabel('Number of Components')
@@ -48,10 +48,10 @@ def plot_correlation_matrix(data):
     :param data: dataframe of features
     :return: the correlation matrix plot
     """
-    # compute correlation matrix
+    # Compute correlation matrix
     corr_matrix = data.corr()
 
-    # plot correlation matrix
+    # Plot correlation matrix
     plt.figure(figsize=(10, 8))
     sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
     plt.title('Correlation Matrix')
@@ -69,28 +69,28 @@ def perform_pca(data, n_components=2, weights=None):
     filenames = list(data.keys())
     features = list(data[filenames[0]].keys())
 
-    # convert features to a Numpy array
+    # Convert features to a Numpy array
     feats = np.array([[data[fname][feat] for feat in features] for fname in filenames])
 
-    # standardize the features
+    # Standardize the features
     scaler = StandardScaler()
     feats_scaled = scaler.fit_transform(feats)
 
-    # perform weighting if weights are provided
+    # Perform weighting if weights are provided
     if weights is not None:
-        # normalize the weights
+        # Normalize the weights
         weights = weights / np.sum(weights)
         feats_scaled = feats_scaled * np.sqrt(weights)
 
-    # perform PCA
+    # Perform PCA
     pca = PCA(n_components=n_components)
     principal_components = pca.fit_transform(feats_scaled)
 
-    # calculate feature importance by component
+    # Calculate feature importance by component
     # dataset_pca = pd.DataFrame(abs(pca.components_), columns=features, index=['PC_1', 'PC_2'])
     # print(dataset_pca)
 
-    # create dataframe
+    # Create dataframe
     pca_columns = [f'principal component {i+1}' for i in range(n_components)]
     pca_df = pd.DataFrame(principal_components, columns=pca_columns)
     pca_df['filename'] = filenames
@@ -105,19 +105,19 @@ def plot_silhouette_scores(df, max_k=10):
     :param max_k: maximum number of clusters to test
     :return: the plot of silhouette scores
     """
-    # prepare the data to be clustered
+    # Prepare the data to be clustered
     feats = df[['principal component 1', 'principal component 2']].values
 
     silhouette_scores = []
 
-    # compute silhouette scores for k values in range 2 to max_k
+    # Compute silhouette scores for k values in range 2 to max_k
     for k in range(2, max_k + 1):
         kmeans = KMeans(n_clusters=k, random_state=42)
         labels = kmeans.fit_predict(feats)
         score = silhouette_score(feats, labels)
         silhouette_scores.append(score)
 
-    # plot the silhouette scores
+    # Plot the silhouette scores
     plt.figure(figsize=(10, 6))
     sns.lineplot(x=range(2, max_k + 1), y=silhouette_scores, marker='o')
     plt.xlabel('Number of Clusters (k)')
@@ -134,10 +134,10 @@ def perform_kmeans_clustering(df, k):
     :param k: number of clusters
     :return: dataframe with cluster labels and cluster centroids
     """
-    # prepare the data to be clustered
+    # Prepare the data to be clustered
     feats = df[['principal component 1', 'principal component 2']].values
 
-    # perform k-means clustering
+    # Perform k-means clustering
     kmeans = KMeans(n_clusters=k, random_state=42)
     df['cluster'] = kmeans.fit_predict(feats)
     centroids = kmeans.cluster_centers_
@@ -157,7 +157,7 @@ def plot_kmeans_clustering(df, centroids, shaded=False):
     sns.scatterplot(data=df, x='principal component 1', y='principal component 2', hue='cluster', palette='viridis',
                     s=100, alpha=0.6, edgecolor='w')
 
-    # highlight centroids
+    # Highlight centroids
     plt.scatter(centroids[:, 0], centroids[:, 1], s=100, c='red', marker='X', label='Centroids')
 
     if shaded:
@@ -180,7 +180,7 @@ def shapiro_wilks_test(df, output_file='processed/normality_test_results.json'):
     :param output_file: output file to save the test results
     """
     results = {}
-    for col in df.columns[1:]:  # skip the first column (filename)
+    for col in df.columns[1:]: # skip the first column (filename)
         stat, p_value = stats.shapiro(df[col])
         results[col] = {'statistic': stat, 'p_value': p_value, 'significant': bool(p_value < 0.05)}
 
@@ -196,7 +196,7 @@ def levenes_test(df, output_file='processed/homogeneity_test_results.json'):
     :param df: the dataframe of features
     :param output_file: output file to save the test results
     """
-    stat, p_value = stats.levene(*[df[col] for col in df.columns[1:]])  # skip the first column (filename)
+    stat, p_value = stats.levene(*[df[col] for col in df.columns[1:]]) # skip the first column (filename)
     results = {'levene_statistic': stat, 'p_value': p_value, 'significant': bool(p_value < 0.05)}
 
     with open(output_file, 'w') as file:
@@ -212,11 +212,11 @@ def merge_clusters(df_1, df_2):
     :param df_2: dataframe with of PCA components and cluster labels
     :return: merged cluster with original features and cluster labels
     """
-    # ensure the 'filename' columns are of the same type
+    # Ensure the 'filename' columns are of the same type
     df_1['filename'] = df_1['filename'].astype(str)
     df_2['filename'] = df_2['filename'].astype(str)
 
-    # merge the dataframes on the 'filename' column and add the 'cluster' column from df_2 to df_1
+    # Merge the dataframes on the 'filename' column and add the 'cluster' column from df_2 to df_1
     raw_df_with_clusters = df_1.copy()
     raw_df_with_clusters = raw_df_with_clusters.merge(df_2[['filename', 'cluster']], on='filename', how='left')
     return raw_df_with_clusters
@@ -231,11 +231,11 @@ def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.j
     :param output_dir: directory to save the analysis plots
     """
     results = {}
-    features = df.columns[1:-1]  # exclude the first column (filename) and the last column (cluster)
+    features = df.columns[1:-1] # exclude the first column (filename) and the last column (cluster)
     clusters = df['cluster'].unique()
     feature_data = {}
 
-    # create output directory if it doesn't exist
+    # Create output directory if it doesn't exist
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     for feature in tqdm(features, desc="Processing features"):
@@ -321,13 +321,13 @@ def create_violin_plot(ax, cluster_values, feature_results, feature_name):
         'Value': data
     })
 
-    # create violin plot
+    # Create violin plot
     sns.violinplot(x='Cluster', y='Value', data=df, ax=ax, inner='box', width=0.7)
 
-    # add individual points with high transparency and small size
+    # Add individual points with high transparency and small size
     sns.stripplot(x='Cluster', y='Value', data=df, ax=ax, color='0.3', alpha=0.5, size=2, jitter=0.2)
 
-    # add significance indicators if available
+    # Add significance indicators if available
     if feature_results['significant']:
         add_significance_indicators(ax, feature_results, df['Value'].max())
 
@@ -347,17 +347,17 @@ def add_significance_indicators(ax, feature_results, max_val):
     gap = max_val * 0.05
     level = 0
 
-    # assuming significant_pairs is a list of tuples (cluster1, cluster2, p_value)
+    # Assuming significant_pairs is a list of tuples (cluster1, cluster2, p_value)
     significant_pairs = [(0, 1, feature_results['p_value'])]
 
     for c1, c2, p_val in significant_pairs:
-        # calculate position for significance bar
+        # Calculate position for significance bar
         y = max_val + gap + (level * gap * 2)
 
-        # draw significance bar
+        # Draw significance bar
         ax.plot([c1, c1, c2, c2], [y - gap / 2, y, y, y - gap / 2], 'k-', linewidth=1)
 
-        # add significance asterisks
+        # Add significance asterisks
         if p_val < 0.001:
             sig = '***'
         elif p_val < 0.01:
@@ -372,7 +372,7 @@ def add_significance_indicators(ax, feature_results, max_val):
 
 
 def main():
-    # load the raw data
+    # Load the raw data
     with open('processed/features.json', 'r') as file:
         sample_data = json.load(file)
 
@@ -415,4 +415,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
