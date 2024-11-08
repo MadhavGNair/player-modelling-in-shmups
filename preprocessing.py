@@ -7,30 +7,12 @@ from pathlib import Path
 GLOBAL_DICT = {}
 
 
-def fix_csv(base_dir):
-    # iterate over all directories and files in the base directory
-    for root, dirs, files in os.walk(base_dir):
-        for file_name in files:
-            if file_name.endswith('.csv'):
-                file_path = os.path.join(root, file_name)
-
-                with open(file_path, 'r', encoding='utf-8') as file:
-                    data = file.read()
-
-                # replace commas in floating-point numbers with periods
-                data = re.sub(r'(\d+),(\d+)', r'\1.\2', data)
-
-                # create temp files
-                temp_file_name = f'temp_{file_name}'
-                temp_file_path = os.path.join(root, temp_file_name)
-
-                with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
-                    temp_file.write(data)
-
-    print("CSV files processed and temp files created successfully.")
-
-
 def explore_csv_file(file_path):
+    """
+    Explore the csv file for data exploration
+    :param file_path: the path of csv file
+    :return: data for exploration
+    """
     try:
         res = {}
         # read the csv
@@ -56,6 +38,11 @@ def explore_csv_file(file_path):
 
 
 def process_csv_file(file_path):
+    """
+    Process the csv file for feature extraction
+    :param file_path: the path of csv file
+    :return: a global dictionary containing the features extracted from each run
+    """
     GLOBAL_DICT[file_path.name] = {}
     try:
         # read the csv
@@ -74,6 +61,7 @@ def process_csv_file(file_path):
         total_bullets_missed = 0
         total_hit_count = 0
         total_bullet_distance = 0
+        total_enemies_killed = 0
 
         for i in range(len(df)):
             # PERCENTAGE DAMAGE TAKEN (BY TYPE OVER ALL DAMAGE TAKEN)
@@ -98,13 +86,13 @@ def process_csv_file(file_path):
                     healing_time = df.loc[i, 'Timestamp'] - last_healing_event_time
                     # calculate the percentage of healing time with respect to the total time
                     healing_percentage = (healing_time / total_time)
-                    # Append the percentage to the list
+                    # append the percentage to the list
                     healing_percentages.append(healing_percentage)
 
                 # update the last healing event time
                 last_healing_event_time = df.loc[i, 'Timestamp']
 
-            # PERCENTAGE BULLETS FIRED (OF TOTAL EVENTS)
+            # TOTAL BULLETS FIRED (OF TOTAL EVENTS)
             if df.loc[i, ' Event'] == 'Bullet Fired':
                 total_bullets_fired += 1
 
@@ -112,10 +100,14 @@ def process_csv_file(file_path):
             if df.loc[i, ' Event'] == 'Bullet Missed':
                 total_bullets_missed += 1
 
-            # AVERAGE DISTANCE BULLET TRAVELS
+            # AVERAGE DISTANCE BULLET TRAVELS and PERCENTAGE BULLETS HIT (OF TOTAL BULLETS FIRED)
             if df.loc[i, ' Event'] == 'Enemy hit':
                 total_hit_count += 1
-                total_bullet_distance += df.loc[i, ' Value']
+                total_bullet_distance += max(df.loc[i, ' Value'], 750)
+
+            # TOTAL ENEMIES KILLED
+            if df.loc[i, ' Event'] == 'Enemy killed':
+                total_enemies_killed += 1
 
         # calculate percentage damage taken
         total_dmg = water_dmg + collision_dmg + bullet_dmg
@@ -126,11 +118,11 @@ def process_csv_file(file_path):
         # calculate the average healing percentage
         average_healing_percentage = sum(healing_percentages) / len(healing_percentages) if healing_percentages else 0
 
-        # calculate percentage bullets fired
-        p_bullets_fired = total_bullets_fired / (len(df) - 1)  # (- 1) because last row is 'Time alive'
-
         # calculate percentage bullets missed
         p_bullets_missed = total_bullets_missed / total_bullets_fired if total_bullets_fired > 0 else 0
+
+        # calculate percentage bullets hit
+        p_bullets_hit = total_hit_count / total_bullets_fired if total_bullets_fired > 0 else 0
 
         # calculate average distance bullets travelled
         average_bullet_distance = total_bullet_distance / total_hit_count if total_hit_count > 0 else 0
@@ -154,15 +146,11 @@ def process_csv_file(file_path):
         p_left = left_count / movement_count if movement_count > 0 else 0
 
         GLOBAL_DICT[file_path.name] = {'p_bullet_dmg': float(p_bullet_dmg),
-                                       'p_water_dmg': float(p_water_dmg),
                                        'p_collision_dmg': float(p_collision_dmg),
-                                       'average_healing_percentage': float(average_healing_percentage),
-                                       'p_bullets_fired': float(p_bullets_fired),
-                                       'p_bullets_missed': float(p_bullets_missed),
-                                       'average_bullet_time': float(average_bullet_distance),
-                                       'p_accelerated': float(p_accelerated),
-                                       'p_right': float(p_right),
-                                       'p_left': float(p_left)
+                                       'total_enemies_killed': int(total_enemies_killed),
+                                       'total_bullets_fired': int(total_bullets_fired),
+                                       'p_bullets_hit': float(p_bullets_hit),
+                                       'total_time_alive': float(total_time)
                                        }
 
         print(f"Successfully processed: {file_path.name}")
@@ -171,6 +159,12 @@ def process_csv_file(file_path):
 
 
 def process_user_folders(main_path, method="preprocess"):
+    """
+    Process all user folders in the main directory
+    :param main_path: path to the main directory
+    :param method: define if files are to be explored or preprocessed
+    :return: dictionary or features or data from exploration
+    """
     main_dir = Path(main_path)
     if method == "exploration":
         dicts = []
@@ -210,6 +204,11 @@ def process_user_folders(main_path, method="preprocess"):
 
 
 def count_csvs(folder_path):
+    """
+    Count the number of csv files (i.e. number of runs) in the folder
+    :param folder_path: the path to the folder
+    :return: the number of csv files
+    """
     main_dir = Path(folder_path)
     user_dirs = [d for d in main_dir.iterdir() if d.is_dir()]
     f = [os.listdir(folder) for folder in user_dirs]
@@ -223,14 +222,21 @@ def count_csvs(folder_path):
 
 
 if __name__ == "__main__":
-    # Replace with your main directory path
-    main_directory = 'D:/Madhav/University/year_2/AI for Game Technology/unsupervised_learning/data'
+    # path to raw data
+    main_directory = './data'
 
+    # number of runs
     # print(count_csvs(main_directory))
 
     process_user_folders(main_directory)
 
-    with open("processed/features_trial.json", "w") as outfile:
+    # output directory
+    output_dir = "processed"
+
+    # create the output directory if it does not exist
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+
+    with open(f"{output_dir}/features.json", "w") as outfile:
         json.dump(GLOBAL_DICT, outfile)
 
     print("\nProcessing complete!")

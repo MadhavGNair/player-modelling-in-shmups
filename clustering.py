@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from pathlib import Path
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 import scipy.stats as stats
@@ -16,6 +17,12 @@ from sklearn.preprocessing import StandardScaler
 
 
 def plot_cumulative_explained_variance(df, n_components=10):
+    """
+    Plot the cumulative explained variance ratio over the number of PCA components
+    :param df: the dataframe to perform PCA on
+    :param n_components: number of PCA components
+    :return: the cumulative explained variance ratio list
+    """
     # perform PCA
     pca = PCA(n_components=n_components)
     pca.fit(df)
@@ -36,6 +43,11 @@ def plot_cumulative_explained_variance(df, n_components=10):
 
 
 def plot_correlation_matrix(data):
+    """
+    Plot the correlation matrix of the features
+    :param data: dataframe of features
+    :return: the correlation matrix plot
+    """
     # compute correlation matrix
     corr_matrix = data.corr()
 
@@ -47,6 +59,13 @@ def plot_correlation_matrix(data):
 
 
 def perform_pca(data, n_components=2, weights=None):
+    """
+    Perform PCA on the data
+    :param data: the dataframe of features
+    :param n_components: number of PCA components
+    :param weights: None or array of weights for each feature
+    :return: dataframe of PCA components
+    """
     filenames = list(data.keys())
     features = list(data[filenames[0]].keys())
 
@@ -67,18 +86,25 @@ def perform_pca(data, n_components=2, weights=None):
     pca = PCA(n_components=n_components)
     principal_components = pca.fit_transform(feats_scaled)
 
-    # feature importance by component
+    # calculate feature importance by component
     # dataset_pca = pd.DataFrame(abs(pca.components_), columns=features, index=['PC_1', 'PC_2'])
     # print(dataset_pca)
 
     # create dataframe
-    pca_df = pd.DataFrame(principal_components, columns=['principal component 1', 'principal component 2'])
+    pca_columns = [f'principal component {i+1}' for i in range(n_components)]
+    pca_df = pd.DataFrame(principal_components, columns=pca_columns)
     pca_df['filename'] = filenames
 
     return pca_df
 
 
 def plot_silhouette_scores(df, max_k=10):
+    """
+    Plot silhouette scores for different k values
+    :param df: the dataframe of PCA components
+    :param max_k: maximum number of clusters to test
+    :return: the plot of silhouette scores
+    """
     # prepare the data to be clustered
     feats = df[['principal component 1', 'principal component 2']].values
 
@@ -102,6 +128,12 @@ def plot_silhouette_scores(df, max_k=10):
 
 
 def perform_kmeans_clustering(df, k):
+    """
+    Perform k-means clustering on the PCA components
+    :param df: dataframe of PCA components
+    :param k: number of clusters
+    :return: dataframe with cluster labels and cluster centroids
+    """
     # prepare the data to be clustered
     feats = df[['principal component 1', 'principal component 2']].values
 
@@ -114,6 +146,13 @@ def perform_kmeans_clustering(df, k):
 
 
 def plot_kmeans_clustering(df, centroids, shaded=False):
+    """
+    Plot the k-means clustering results with PCA components
+    :param df: dataframe of PCA components with cluster labels
+    :param centroids: the cluster centroids
+    :param shaded: boolean to determine if clusters should be shaded or not
+    :return: the plot of clustering results
+    """
     plt.figure(figsize=(10, 6))
     sns.scatterplot(data=df, x='principal component 1', y='principal component 2', hue='cluster', palette='viridis',
                     s=100, alpha=0.6, edgecolor='w')
@@ -134,7 +173,12 @@ def plot_kmeans_clustering(df, centroids, shaded=False):
     plt.show()
 
 
-def shapiro_wilks_test(df, output_file='processed/normality_test_results_weighted.json'):
+def shapiro_wilks_test(df, output_file='processed/normality_test_results.json'):
+    """
+    Perform the Shapiro-Wilks normality test on the data
+    :param df: the dataframe of features
+    :param output_file: output file to save the test results
+    """
     results = {}
     for col in df.columns[1:]:  # skip the first column (filename)
         stat, p_value = stats.shapiro(df[col])
@@ -146,7 +190,12 @@ def shapiro_wilks_test(df, output_file='processed/normality_test_results_weighte
     print(f'Normality test results saved to {output_file}')
 
 
-def levenes_test(df, output_file='processed/homogeneity_test_results_weighted.json'):
+def levenes_test(df, output_file='processed/homogeneity_test_results.json'):
+    """
+    Perform Levene's test for homogeneity of variance
+    :param df: the dataframe of features
+    :param output_file: output file to save the test results
+    """
     stat, p_value = stats.levene(*[df[col] for col in df.columns[1:]])  # skip the first column (filename)
     results = {'levene_statistic': stat, 'p_value': p_value, 'significant': bool(p_value < 0.05)}
 
@@ -157,6 +206,12 @@ def levenes_test(df, output_file='processed/homogeneity_test_results_weighted.js
 
 
 def merge_clusters(df_1, df_2):
+    """
+    Merge the original dataframe of features with cluster labels from dataframe with PCA components
+    :param df_1: dataframe of features
+    :param df_2: dataframe with of PCA components and cluster labels
+    :return: merged cluster with original features and cluster labels
+    """
     # ensure the 'filename' columns are of the same type
     df_1['filename'] = df_1['filename'].astype(str)
     df_2['filename'] = df_2['filename'].astype(str)
@@ -167,20 +222,27 @@ def merge_clusters(df_1, df_2):
     return raw_df_with_clusters
 
 
-def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results_weighted.json', save=False, output_dir="analysis_plots"):
+def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results.json', save=True, output_dir="analysis_plots"):
+    """
+    Perform the Kruskal-Wallis test on the data
+    :param df: the dataframe of features with cluster labels
+    :param output_file: output file to save the results
+    :param save: boolean to determine if the results should be saved
+    :param output_dir: directory to save the analysis plots
+    """
     results = {}
-    features = df.columns[1:-1]  # Exclude the first column (filename) and the last column (cluster)
+    features = df.columns[1:-1]  # exclude the first column (filename) and the last column (cluster)
     clusters = df['cluster'].unique()
     feature_data = {}
 
     # create output directory if it doesn't exist
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-    for feature in features:
+    for feature in tqdm(features, desc="Processing features"):
         data_by_cluster = [df[df['cluster'] == cluster][feature] for cluster in clusters]
         stat, p_value = kruskal(*data_by_cluster)
         significant = p_value < 0.05
-        results[feature] = {'statistic': stat, 'p_value': p_value, 'significant': significant}
+        results[feature] = {'statistic': stat, 'p_value': p_value, 'significant': bool(significant)}
 
         feature_data[feature] = {f'Cluster {cluster}': df[df['cluster'] == cluster][feature].tolist() for cluster in clusters}
 
@@ -196,7 +258,7 @@ def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results_w
         create_violin_plot(ax2, feature_data[feature], results[feature], feature)
 
         plt.tight_layout()
-        plt.savefig(f"{output_dir}/{feature}_analysis_1.png", dpi=300, bbox_inches='tight')
+        plt.savefig(f"{output_dir}/{feature}_analysis.png", dpi=300, bbox_inches='tight')
         plt.close()
 
     if save:
@@ -206,6 +268,12 @@ def kruskal_wallis_test(df, output_file='processed/kruskal_wallis_test_results_w
 
 
 def create_boxplot(ax, cluster_values, feature_name):
+    """
+    Create a boxplot of the feature values by cluster
+    :param ax: the axis to plot on
+    :param cluster_values: the feature values by cluster
+    :param feature_name: the name of the feature
+    """
     data = []
     labels = []
 
@@ -234,6 +302,13 @@ def create_boxplot(ax, cluster_values, feature_name):
 
 
 def create_violin_plot(ax, cluster_values, feature_results, feature_name):
+    """
+    Create a violin plot of the feature values by cluster
+    :param ax: the axis to plot on
+    :param cluster_values: the feature values by cluster
+    :param feature_results: the results of the Kruskal-Wallis test
+    :param feature_name: the name of the feature
+    """
     data = []
     labels = []
 
@@ -263,6 +338,12 @@ def create_violin_plot(ax, cluster_values, feature_results, feature_name):
 
 
 def add_significance_indicators(ax, feature_results, max_val):
+    """
+    Add significance indicators to the violin plot (line with asterisks)
+    :param ax: the axis to plot on
+    :param feature_results: the results of the Kruskal-Wallis test
+    :param max_val: the maximum value of the feature (for positioning the line)
+    """
     gap = max_val * 0.05
     level = 0
 
@@ -298,35 +379,37 @@ def main():
     raw_df = pd.DataFrame(sample_data).T.reset_index()
     raw_df.rename(columns={'index': 'filename'}, inplace=True)
 
-    # PRE-PCA METRICS:
+    """
+    In order to uncomment and run the code properly, follow the steps below:
+    1. Uncomment all lines under 1 (392) and 2 (395) and run the code
+    2. Comment out 2 (395) and uncomment all lines under 3 (399-400) and run the code
+    3. Comment out line 400 (plot_kmeans_clustering) and uncomment all lines under 4 (404) and 5 (407) and run the code
+    4. Comment out all lines under 4 (404) and 5 (407) and uncomment all lines under 6 (411-412) and run the code
+    5. Comment out all previously uncommented lines
+    """
+
+    # 0. (Optional) PRE-PCA METRICS:
     # plot_correlation_matrix(raw_df[raw_df.columns[1:]])
-    # plot_cumulative_explained_variance(raw_df[raw_df.columns[1:]], n_components=10)
+    # plot_cumulative_explained_variance(raw_df[raw_df.columns[1:]], n_components=6)
 
-    # CONVERT TO PCA:
-    weights = [0.8, 0.4, 0.6, 0.5, 0.8, 0.2, 0.8, 0.7, 0.5, 0.5, 0.7]
-    pca_df = perform_pca(sample_data, n_components=2, weights=weights)
+    # 1. CONVERT TO PCA:
+    # pca_df = perform_pca(sample_data, n_components=2)
 
-    # PERFORM OPTIMIZATION:
+    # 2. PERFORM OPTIMIZATION:
     # plot_silhouette_scores(pca_df, max_k=10)
 
-    # PERFORM KMEANS CLUSTERING:
+    # 3. PERFORM KMEANS CLUSTERING:
     # clustered_df, centroids = perform_kmeans_clustering(pca_df, k=2)
     # plot_kmeans_clustering(clustered_df, centroids, shaded=True)
 
-    # NORMALITY TEST:
+    # 4. NORMALITY TEST:
     # shapiro_wilks_test(raw_df)
 
-    # HOMOGENEITY TEST:
+    # 5. HOMOGENEITY TEST:
     # levenes_test(raw_df)
 
-    # STATISTICAL ANALYSIS:
+    # 6. STATISTICAL ANALYSIS:
     # merged_df = merge_clusters(raw_df, clustered_df)
-    # feature_columns = merged_df.columns[1:12]
-
-    # # apply the weights to the features
-    # for i, col in enumerate(feature_columns):
-    #     merged_df[col] = merged_df[col] * weights[i]
-
     # kruskal_wallis_test(merged_df)
 
 
