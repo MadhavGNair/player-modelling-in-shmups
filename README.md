@@ -31,4 +31,4 @@ Follow the following steps to run the analysis:
    3. The plots from Kruskal-Wallis test will be saved in the `analysis_plots/` folder (created at runtime)
    4. Any saved file location will be notified in the console
 
-For any questions regarding analysis, please contact Madhav Girish Nair (m.girishnair@students.uu.nl)
+For any questions regarding analysis, please contact Madhav Girish Nair (madhavgirish02@gmail.com)
